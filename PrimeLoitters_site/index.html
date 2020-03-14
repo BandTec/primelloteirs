@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="utf-8">
   <title>PrimeLoitters</title>
@@ -12,7 +13,8 @@
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fontes -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+    rel="stylesheet">
 
   <!-- Bootstrap CSS File -->
   <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,6 +28,8 @@
 
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/login-register.css">
 
 </head>
 
@@ -44,18 +48,18 @@
       </div>
 
       <nav id="nav-menu-container">
-        <ul class="nav-menu">
+        <ul class="nav-menu ">
           <li class="menu-active"><a href="#intro">Inicio</a></li>
           <li><a href="#about">Sobre</a></li>
           <li><a href="#services">Serviços</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#team">Time</a></li>
-          <li class="menu-has-children"><a href="">Acessar</a>
-            <ul>
-              <li><a href="#">Login</a></li>
-              <li><a href="#">Cadastro</a></li>
-              <!-- <li><a href="#">Drop Down 4</a></li> -->
-              <!-- <li><a href="#">Drop Down 5</a></li> -->
+          <li class="menu-has-children has-dropdown"><a href="">Acessar</a>
+            <ul class="dropdown">
+              <li><a class="btn big-register" data-toggle="modal" href="javascript:void(0)"
+                  onclick="openRegisterModal();">Cadastro</a></li>
+              <li><a class="btn big-login" data-toggle="modal" href="javascript:void(0)"
+                  onclick="openLoginModal();">Login</a></li>
             </ul>
           </li>
           <li><a href="#contact">Contato</a></li>
@@ -63,6 +67,76 @@
       </nav><!-- #nav-menu-container -->
     </div>
   </header><!-- #header -->
+
+  <div class="modal fade login" id="loginModal">
+    <div class="modal-dialog login animated">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Login</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box">
+                    <div class="content">
+                        <div class="error"></div>
+                        <div class="form loginBox">
+                            <form id="form_login" method="post" onsubmit="return entrar()">
+                                <input class="form-control" type="text" placeholder="Login" name="login">
+                                <input class="form-control" type="password" placeholder="Senha" name="senha">
+                                <button id="btn_entrar" class="btn btn-default btn-login">Entrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="content esqueciSenhaBox" style="display: none;">
+                        <div class="form">
+                            <form id="form_esqueciSenha" method="POST" onsubmit="return entrar()">
+                                <input class="form-control" type="text" placeholder="email" name="email">
+                                <button id="btn_recuperar" class="btn btn-default btn-login">Enviar link</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="content registerBox" style="display:none;">
+                        <div class="form">
+                            <form id="form_cadastro" method="post" onsubmit="return cadastrar()">
+                                <input placeholder="Nome" type="text" name="nome_usuario_cadastro" required
+                                    minlength="4">
+                                <input placeholder="Login" type="text" class="form-control" name="login_cadastro"
+                                    required minlength="4">
+                                <input placeholder="Senha" type="password" class="form-control" name="senha_cadastro"
+                                    required minlength="4">
+                                <input placeholder="CPF" type="text" class="form-control" name="cpf_cadastro"
+                                    required minlength="4">
+                                <br>
+                                <button class="btn btn-default btn-login" id="btn_cadastrar">Cadastrar</button>
+                                <br>
+                                <!-- <span><a href="">Esqueci minha senha</a></span> -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="forgot esqueciSenha-footer">
+                    <span>
+                        <a href="javascript: showEsqueciSenhaForm();">Esqueci minha senha</a>
+                    </span>
+                </div>
+                <div class="forgot login-footer">
+                    <span>Não é nosso cliente ainda?
+                        <a href="javascript: showRegisterForm();">Cadastre-se</a></span>
+                </div>
+                <div class="forgot register-footer" style="display:none">
+                    <span>Já tem uma conta?</span>
+                    <a href="javascript: showLoginForm();">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
   <!--==========================
     Intro Section
@@ -80,7 +154,9 @@
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2>Nós somos profissionais</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat.</p>
                 <a href="#featured-services" class="btn-get-started scrollto">Iniciar</a>
               </div>
             </div>
@@ -91,7 +167,9 @@
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2>Nós somos especialistas</h2>
-                <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut.</p>
+                <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime
+                  placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem
+                  quibusdam et aut officiis debitis aut.</p>
                 <a href="#featured-services" class="btn-get-started scrollto">Iniciar</a>
               </div>
             </div>
@@ -102,7 +180,9 @@
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2>Nós somos qualificados</h2>
-                <p>Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt omnis iste natus error sit voluptatem accusantium.</p>
+                <p>Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+                  aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt omnis iste
+                  natus error sit voluptatem accusantium.</p>
                 <a href="#featured-services" class="btn-get-started scrollto">Iniciar</a>
               </div>
             </div>
@@ -113,7 +193,9 @@
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2>Nós somos preeminente</h2>
-                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum.</p>
+                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
+                  quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut
+                  enim ad minima veniam, quis nostrum.</p>
                 <a href="#featured-services" class="btn-get-started scrollto">Iniciar</a>
               </div>
             </div>
@@ -124,7 +206,9 @@
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2>Nós somos <b style="color: #18d26e;">PrimeLoitters</b></h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat.</p>
                 <a href="#featured-services" class="btn-get-started scrollto">Iniciar</a>
               </div>
             </div>
@@ -158,19 +242,22 @@
           <div class="col-lg-4 box">
             <i class="ion-ios-bookmarks-outline"></i>
             <h4 class="title"><a href="">Lorem Ipsum Delino</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
+              occaecati cupiditate non provident</p>
           </div>
 
           <div class="col-lg-4 box box-bg">
             <i class="ion-ios-stopwatch-outline"></i>
             <h4 class="title"><a href="">Dolor Sitema</a></h4>
-            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat tarad limino ata</p>
           </div>
 
           <div class="col-lg-4 box">
             <i class="ion-ios-heart-outline"></i>
             <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+              fugiat nulla pariatur</p>
           </div>
 
         </div>
@@ -185,8 +272,8 @@
 
         <header class="section-header">
           <h3>Sobre nós</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </header>
 
@@ -201,7 +288,7 @@
               <h2 class="title"><a href="#">Missão</a></h2>
               <p>
                 Fornecer soluções de engenharia, tecnologia da informação e de processos para indústrias líderes;
-                estabelecer com o cliente, funcionários e sociedade uma relação de longo prazo e contribuir para 
+                estabelecer com o cliente, funcionários e sociedade uma relação de longo prazo e contribuir para
                 o desenvolvimento da tecnologia.
               </p>
             </div>
@@ -215,7 +302,7 @@
               </div>
               <h2 class="title"><a href="#">Visão</a></h2>
               <p>
-                Ser empresa de referência, reconhecida como a melhor opção por clientes, colaboradores, comunidade, 
+                Ser empresa de referência, reconhecida como a melhor opção por clientes, colaboradores, comunidade,
                 fornecedores e investidores, pela qualidade de nossos produtos, serviços e relacionamento.
               </p>
             </div>
@@ -229,7 +316,7 @@
               </div>
               <h2 class="title"><a href="#">Valores</a></h2>
               <p>
-                Qualidade e melhoria contínua dos produtos e serviços para satisfação dos consumidores; 
+                Qualidade e melhoria contínua dos produtos e serviços para satisfação dos consumidores;
                 Ética, respeito e honestidade; Qualidade; Inovação.
               </p>
             </div>
@@ -248,7 +335,9 @@
 
         <header class="section-header wow fadeInUp">
           <h3>Serviços</h3>
-          <p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus, ad pro quaestio laboramus. Ei ubique vivendum pro. At ius nisl accusam lorenta zanos paradigno tridexa panatarel.</p>
+          <p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus, ad
+            pro quaestio laboramus. Ei ubique vivendum pro. At ius nisl accusam lorenta zanos paradigno tridexa
+            panatarel.</p>
         </header>
 
         <div class="row">
@@ -256,32 +345,38 @@
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-analytics-outline"></i></div>
             <h4 class="title"><a href="">Teste de Stress</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
+              occaecati cupiditate non provident</p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-bookmarks-outline"></i></div>
             <h4 class="title"><a href="">Teste de Carga</a></h4>
-            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat tarad limino ata</p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-paper-outline"></i></div>
             <h4 class="title"><a href="">Teste de Resposta</a></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+              fugiat nulla pariatur</p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-speedometer-outline"></i></div>
             <h4 class="title"><a href="">Teste de Velocidade</a></h4>
-            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum</p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-barcode-outline"></i></div>
             <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+              voluptatum deleniti atque</p>
           </div>
           <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
             <div class="icon"><i class="ion-ios-people-outline"></i></div>
             <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum
+              soluta nobis est eligendi</p>
           </div>
 
         </div>
@@ -295,7 +390,7 @@
     <section id="call-to-action" class="wow fadeIn">
       <div class="container text-center">
         <h3>Sobre nossa ferramenta</h3>
-        <p>Monitoramento de maquina e servidores de mercados que possuem um servidor interno, 
+        <p>Monitoramento de maquina e servidores de mercados que possuem um servidor interno,
           oferecendo aos clientes ferramentas que conseguem detectar a performance em picos de uso.</p>
         <!-- <a class="cta-btn" href="#">Call To Action</a> -->
       </div>
@@ -310,32 +405,36 @@
         <header class="section-header">
           <h3>Ranking dos testes</h3>
           <p>
-            
+
           </p>
         </header>
 
         <div class="skills-content">
 
           <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+              aria-valuemax="100">
               <span class="skill">Carga <i class="val">100%</i></span>
             </div>
           </div>
 
           <div class="progress">
-            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="90" aria-valuemin="0"
+              aria-valuemax="100">
               <span class="skill">Stress <i class="val">90%</i></span>
             </div>
           </div>
 
           <div class="progress">
-            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0"
+              aria-valuemax="100">
               <span class="skill">Velocidade <i class="val">75%</i></span>
             </div>
           </div>
 
           <div class="progress">
-            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="55" aria-valuemin="0"
+              aria-valuemax="100">
               <span class="skill">Resposta <i class="val">55%</i></span>
             </div>
           </div>
@@ -348,7 +447,7 @@
     <!--==========================
       Facts Section
     ============================-->
-    <section id="facts"  class="wow fadeIn">
+    <section id="facts" class="wow fadeIn">
       <div class="container">
 
         <header class="section-header">
@@ -358,27 +457,27 @@
 
         <div class="row counters">
 
-  				<div class="col-lg-3 col-6 text-center">
+          <div class="col-lg-3 col-6 text-center">
             <span data-toggle="counter-up">421</span>
             <p>Carga</p>
-  				</div>
+          </div>
 
           <div class="col-lg-3 col-6 text-center">
             <span data-toggle="counter-up">274</span>
             <p>Stress</p>
-  				</div>
+          </div>
 
           <div class="col-lg-3 col-6 text-center">
             <span data-toggle="counter-up">208</span>
             <p>Velocidade</p>
-  				</div>
+          </div>
 
           <div class="col-lg-3 col-6 text-center">
             <span data-toggle="counter-up">18</span>
             <p>Resposta</p>
-  				</div>
+          </div>
 
-  			</div>
+        </div>
 
         <div class="facts-img">
           <img src="img/facts-img.png" alt="" class="img-fluid">
@@ -390,7 +489,7 @@
     <!--==========================
       Portfolio Section
     ============================-->
-    <section id="portfolio"  class="section-bg" >
+    <section id="portfolio" class="section-bg">
       <div class="container">
 
         <header class="section-header">
@@ -414,7 +513,8 @@
             <div class="portfolio-wrap">
               <figure>
                 <img src="img/portfolio/app1.jpg" class="img-fluid" alt="">
-                <a href="img/portfolio/app1.jpg" data-lightbox="portfolio" data-title="App 1" class="link-preview" title="Preview"><i class="ion ion-eye"></i></a>
+                <a href="img/portfolio/app1.jpg" data-lightbox="portfolio" data-title="App 1" class="link-preview"
+                  title="Preview"><i class="ion ion-eye"></i></a>
                 <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
               </figure>
 
@@ -429,7 +529,8 @@
             <div class="portfolio-wrap">
               <figure>
                 <img src="img/portfolio/web3.jpg" class="img-fluid" alt="">
-                <a href="img/portfolio/web3.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 3" title="Preview"><i class="ion ion-eye"></i></a>
+                <a href="img/portfolio/web3.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 3"
+                  title="Preview"><i class="ion ion-eye"></i></a>
                 <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
               </figure>
 
@@ -444,7 +545,8 @@
             <div class="portfolio-wrap">
               <figure>
                 <img src="img/portfolio/app2.jpg" class="img-fluid" alt="">
-                <a href="img/portfolio/app2.jpg" class="link-preview" data-lightbox="portfolio" data-title="App 2" title="Preview"><i class="ion ion-eye"></i></a>
+                <a href="img/portfolio/app2.jpg" class="link-preview" data-lightbox="portfolio" data-title="App 2"
+                  title="Preview"><i class="ion ion-eye"></i></a>
                 <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
               </figure>
 
@@ -459,7 +561,8 @@
             <div class="portfolio-wrap">
               <figure>
                 <img src="img/portfolio/card2.jpg" class="img-fluid" alt="">
-                <a href="img/portfolio/card2.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 2" title="Preview"><i class="ion ion-eye"></i></a>
+                <a href="img/portfolio/card2.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 2"
+                  title="Preview"><i class="ion ion-eye"></i></a>
                 <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
               </figure>
 
@@ -474,7 +577,8 @@
             <div class="portfolio-wrap">
               <figure>
                 <img src="img/portfolio/web2.jpg" class="img-fluid" alt="">
-                <a href="img/portfolio/web2.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 2" title="Preview"><i class="ion ion-eye"></i></a>
+                <a href="img/portfolio/web2.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 2"
+                  title="Preview"><i class="ion ion-eye"></i></a>
                 <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
               </figure>
 
@@ -489,7 +593,8 @@
             <div class="portfolio-wrap">
               <figure>
                 <img src="img/portfolio/app3.jpg" class="img-fluid" alt="">
-                <a href="img/portfolio/app3.jpg" class="link-preview" data-lightbox="portfolio" data-title="App 3" title="Preview"><i class="ion ion-eye"></i></a>
+                <a href="img/portfolio/app3.jpg" class="link-preview" data-lightbox="portfolio" data-title="App 3"
+                  title="Preview"><i class="ion ion-eye"></i></a>
                 <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
               </figure>
 
@@ -504,7 +609,8 @@
             <div class="portfolio-wrap">
               <figure>
                 <img src="img/portfolio/card1.jpg" class="img-fluid" alt="">
-                <a href="img/portfolio/card1.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 1" title="Preview"><i class="ion ion-eye"></i></a>
+                <a href="img/portfolio/card1.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 1"
+                  title="Preview"><i class="ion ion-eye"></i></a>
                 <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
               </figure>
 
@@ -519,7 +625,8 @@
             <div class="portfolio-wrap">
               <figure>
                 <img src="img/portfolio/card3.jpg" class="img-fluid" alt="">
-                <a href="img/portfolio/card3.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 3" title="Preview"><i class="ion ion-eye"></i></a>
+                <a href="img/portfolio/card3.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 3"
+                  title="Preview"><i class="ion ion-eye"></i></a>
                 <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
               </figure>
 
@@ -534,7 +641,8 @@
             <div class="portfolio-wrap">
               <figure>
                 <img src="img/portfolio/web1.jpg" class="img-fluid" alt="">
-                <a href="img/portfolio/web1.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 1" title="Preview"><i class="ion ion-eye"></i></a>
+                <a href="img/portfolio/web1.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 1"
+                  title="Preview"><i class="ion ion-eye"></i></a>
                 <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
               </figure>
 
@@ -579,7 +687,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="col-lg-3 col-md-6 wow fadeInUp">
             <div class="member">
               <img src="./img/fotos/maycon.jpg" class="img-fluid" alt="">
@@ -702,20 +810,24 @@
           <form action="" method="post" role="form" class="contactForm">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Nome" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                <input type="text" name="name" class="form-control" id="name" placeholder="Nome" data-rule="minlen:4"
+                  data-msg="Please enter at least 4 chars" />
                 <div class="validation"></div>
               </div>
               <div class="form-group col-md-6">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" />
+                <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email"
+                  data-msg="Please enter a valid email" />
                 <div class="validation"></div>
               </div>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Titulo" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Titulo"
+                data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
               <div class="validation"></div>
             </div>
             <div class="form-group">
-              <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Mensagem"></textarea>
+              <textarea class="form-control" name="message" rows="5" data-rule="required"
+                data-msg="Please write something for us" placeholder="Mensagem"></textarea>
               <div class="validation"></div>
             </div>
             <div class="text-center"><button type="submit">Enviar mensagem</button></div>
@@ -737,7 +849,9 @@
 
           <div class="col-lg-3 col-md-6 footer-info">
             <h3>Primeloitters</h3>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies
+              darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo.
+              Amet volutpat consequat mauris nunc congue.</p>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
@@ -773,9 +887,10 @@
 
           <div class="col-lg-3 col-md-6 footer-newsletter">
             <h4>Notícias</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.</p>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore
+              legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.</p>
             <form action="" method="post">
-              <input type="email" name="email"><input type="submit"  value="Inscreva-se">
+              <input type="email" name="email"><input type="submit" value="Inscreva-se">
             </form>
           </div>
 
@@ -822,5 +937,8 @@
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
 
+  <script src="js/login-register.js"></script>
+
 </body>
+
 </html>
