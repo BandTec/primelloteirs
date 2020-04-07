@@ -1,15 +1,40 @@
 package swingprojeto;
 
+import java.awt.Color;
+import java.io.File;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class TelaMonitoramento extends javax.swing.JFrame {
 
     Random aleatorio = new Random();
-
+    String somErro = "./src/swingprojeto/erro.wav";
+    
+  void PlayErro(String path) {
+      try{
+          File arquivo = new File(path);
+          if (arquivo.exists()) {
+              
+              AudioInputStream ai = AudioSystem.getAudioInputStream(arquivo);
+              Clip clipErro = AudioSystem.getClip();
+              clipErro.open(ai);
+              clipErro.start();
+              System.out.println("era pra sair um som agr");
+              //JOptionPane.showMessageDialog(null, "aperta o butao");
+          } else {
+              System.out.println("n achei");
+          }
+                    
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+  }
     public TelaMonitoramento() {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -85,7 +110,7 @@ public class TelaMonitoramento extends javax.swing.JFrame {
         barMemoria.setStringPainted(true);
         getContentPane().add(barMemoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 128, 200, -1));
 
-        barDisco.setForeground(new java.awt.Color(51, 102, 255));
+        barDisco.setForeground(new java.awt.Color(51, 100, 255));
         barDisco.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 102, 255), 2, true));
         barDisco.setStringPainted(true);
         getContentPane().add(barDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 174, 200, -1));
@@ -122,10 +147,35 @@ public class TelaMonitoramento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public float ManoSemCondicoesNenhuma(int cor) {
+            float porcentagemInvertida = cor - 100;
+            float porcentagemInvertidaPositiva = porcentagemInvertida * -1;
+            float corHsbFloat = porcentagemInvertidaPositiva / 333;
+            float manoEuNaoToAguentandomais = corHsbFloat;
+            return manoEuNaoToAguentandomais;
+    }
     private void btnMonitorarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonitorarActionPerformed
         barCpu.setValue(aleatorio.nextInt(101));
         barMemoria.setValue(aleatorio.nextInt(101));
         barDisco.setValue(aleatorio.nextInt(101));
+            
+//      ----  debug ----
+//        System.out.println("valor disco = " + manokkkk);
+//        System.out.println(manokkkk + " - 100 = " + agr);
+//        System.out.println(agr + " vezes - 1 = " +  agr2);
+//        System.out.println(agr2 + " dividido por 333 não to aguentando mais" +  sera);
+//        //System.out.println("valor da variavel *foi* : " + foi);
+        barDisco.setForeground(Color.getHSBColor(ManoSemCondicoesNenhuma(barDisco.getValue()), 1.0f, 1.0f));
+        barMemoria.setForeground(Color.getHSBColor(ManoSemCondicoesNenhuma(barMemoria.getValue()), 1.0f, 1.0f));
+        barCpu.setForeground(Color.getHSBColor(ManoSemCondicoesNenhuma(barCpu.getValue()), 1.0f, 1.0f));
+
+        if (        barDisco.getValue() > 90
+                ||  barCpu.getValue() > 90
+                ||  barMemoria.getValue() > 90)
+        {
+            PlayErro(somErro);
+        }
+
     }//GEN-LAST:event_btnMonitorarActionPerformed
 
     /**
@@ -133,6 +183,11 @@ public class TelaMonitoramento extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        
+        //NewClass musicObject = new NewClass();
+        //musicObject.PlayErro(filepath);
+
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
