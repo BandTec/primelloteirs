@@ -778,7 +778,7 @@ section {
 
 .au-input {
     line-height: 43px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #000000;
     font-size: 14px;
     color: #666;
     padding: 0 17px;
@@ -897,7 +897,7 @@ section {
     right: 0;
     min-width: 65px;
     line-height: 43px;
-    border: 1px solid #e5e5e5;
+    /* border: 1px solid #e5e5e5; */
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -1249,10 +1249,10 @@ section {
 /* ----- Header ----- */
 
 .header-desktop {
-    background: #f5f5f5;
-    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.95);
+    /* -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);1 */
     position: fixed;
     top: 0;
     right: 0;
@@ -1645,12 +1645,12 @@ section {
     left: 0;
     top: 0;
     bottom: 0;
-    background: #fff;
+    background: rgb(255, 255, 255);
     overflow-y: auto;
 }
 
 .menu-sidebar .logo {
-    background: #f5f5f5;
+    background: rgba(0, 0, 0, 0.95);
     height: 75px;
     padding: 0 35px;
     display: -webkit-box;
@@ -1663,10 +1663,10 @@ section {
     -moz-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    /* -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    border-right: 1px solid #e5e5e5;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1); */
+    /* border-right: 1px solid #e5e5e5; */
     position: relative;
     z-index: 3;
 }
@@ -1681,6 +1681,7 @@ section {
 }
 
 .menu-sidebar__content {
+    background-color: rgb(0, 0, 0, 0.95);
     position: relative;
     height: -webkit-calc(100vh - 75px);
     height: -moz-calc(100vh - 75px);
@@ -1694,7 +1695,7 @@ section {
 
 .navbar-sidebar .navbar__list li a {
     display: block;
-    color: #555;
+    color: rgb(255, 255, 255);
     font-size: 16px;
     padding: 15px 0;
 }
@@ -1704,11 +1705,11 @@ section {
 }
 
 .navbar-sidebar .navbar__list li a:hover {
-    color: #4272d7;
+    color: #007bff;
 }
 
 .navbar-sidebar .navbar__list li.active>a {
-    color: #4272d7;
+    color: #18d26e;
 }
 
 .has-sub {
@@ -2218,7 +2219,7 @@ section {
     -moz-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background: #365cad;
+    background: #2552b4;
     padding: 0 35px;
 }
 
@@ -13319,4 +13320,17 @@ section {
 .vue-lists ul,
 .vue-lists ol {
     padding-left: 30px;
+}
+
+#logo {
+    color: white;
+    font-size: 34px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding-left: 10px;
+    border-left: 4px solid #18d26e;
 }
