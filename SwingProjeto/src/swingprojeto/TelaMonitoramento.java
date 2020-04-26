@@ -1,40 +1,17 @@
 package swingprojeto;
 
-import java.awt.Color;
-import java.io.File;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+
 public class TelaMonitoramento extends javax.swing.JFrame {
 
-    Random aleatorio = new Random();
-    String somErro = "./src/swingprojeto/erro.wav";
-    
-  void PlayErro(String path) {
-      try{
-          File arquivo = new File(path);
-          if (arquivo.exists()) {
-              
-              AudioInputStream ai = AudioSystem.getAudioInputStream(arquivo);
-              Clip clipErro = AudioSystem.getClip();
-              clipErro.open(ai);
-              clipErro.start();
-              System.out.println("era pra sair um som agr");
-              //JOptionPane.showMessageDialog(null, "aperta o butao");
-          } else {
-              System.out.println("n achei");
-          }
-                    
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-  }
+    public static int contagemErrosCpu = 0;
+    public static int contagemErrosMem = 0;
+    public static int contagemErrosDsk = 0;
+
     public TelaMonitoramento() {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -51,15 +28,15 @@ public class TelaMonitoramento extends javax.swing.JFrame {
 
         barCpu.setMaximum(101);
         barCpu.setMinimum(0);
-        barCpu.setValue(aleatorio.nextInt(101));
+        barCpu.setValue(0);
 
         barMemoria.setMaximum(101);
         barMemoria.setMinimum(0);
-        barMemoria.setValue(aleatorio.nextInt(101));
+        barMemoria.setValue(0);
 
         barDisco.setMaximum(101);
         barDisco.setMinimum(0);
-        barDisco.setValue(aleatorio.nextInt(101));
+        barDisco.setValue(0);
 
     }
 
@@ -67,19 +44,24 @@ public class TelaMonitoramento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         lblCpu = new javax.swing.JLabel();
         lblMemoria = new javax.swing.JLabel();
         lblDisco = new javax.swing.JLabel();
         barCpu = new javax.swing.JProgressBar();
         barMemoria = new javax.swing.JProgressBar();
         barDisco = new javax.swing.JProgressBar();
-        btnMonitorar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monitoramento de Sistema");
@@ -115,14 +97,6 @@ public class TelaMonitoramento extends javax.swing.JFrame {
         barDisco.setStringPainted(true);
         getContentPane().add(barDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 174, 200, -1));
 
-        btnMonitorar.setText("Monitorar");
-        btnMonitorar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMonitorarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnMonitorar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 162, 41));
-
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Desempenho da máquina");
@@ -147,47 +121,12 @@ public class TelaMonitoramento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public float ManoSemCondicoesNenhuma(int cor) {
-            float porcentagemInvertida = cor - 100;
-            float porcentagemInvertidaPositiva = porcentagemInvertida * -1;
-            float corHsbFloat = porcentagemInvertidaPositiva / 333;
-            float manoEuNaoToAguentandomais = corHsbFloat;
-            return manoEuNaoToAguentandomais;
-    }
-    private void btnMonitorarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonitorarActionPerformed
-        barCpu.setValue(aleatorio.nextInt(101));
-        barMemoria.setValue(aleatorio.nextInt(101));
-        barDisco.setValue(aleatorio.nextInt(101));
-            
-//      ----  debug ----
-//        System.out.println("valor disco = " + manokkkk);
-//        System.out.println(manokkkk + " - 100 = " + agr);
-//        System.out.println(agr + " vezes - 1 = " +  agr2);
-//        System.out.println(agr2 + " dividido por 333 não to aguentando mais" +  sera);
-//        //System.out.println("valor da variavel *foi* : " + foi);
-        barDisco.setForeground(Color.getHSBColor(ManoSemCondicoesNenhuma(barDisco.getValue()), 1.0f, 1.0f));
-        barMemoria.setForeground(Color.getHSBColor(ManoSemCondicoesNenhuma(barMemoria.getValue()), 1.0f, 1.0f));
-        barCpu.setForeground(Color.getHSBColor(ManoSemCondicoesNenhuma(barCpu.getValue()), 1.0f, 1.0f));
 
-        if (        barDisco.getValue() > 90
-                ||  barCpu.getValue() > 90
-                ||  barMemoria.getValue() > 90)
-        {
-            PlayErro(somErro);
-        }
-
-    }//GEN-LAST:event_btnMonitorarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        
-        //NewClass musicObject = new NewClass();
-        //musicObject.PlayErro(filepath);
 
-        
+        ThreadCpu ThCpu = new ThreadCpu();
+        ThreadMem ThMem = new ThreadMem();
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -220,22 +159,25 @@ public class TelaMonitoramento extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                ThCpu.start();
+                ThMem.start();
                 new TelaMonitoramento().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JProgressBar barCpu;
-    private javax.swing.JProgressBar barDisco;
-    private javax.swing.JProgressBar barMemoria;
-    private javax.swing.JButton btnMonitorar;
+    public static javax.swing.JProgressBar barCpu;
+    public static javax.swing.JProgressBar barDisco;
+    public static javax.swing.JProgressBar barMemoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblCpu;
     private javax.swing.JLabel lblDisco;
     private javax.swing.JLabel lblMemoria;
