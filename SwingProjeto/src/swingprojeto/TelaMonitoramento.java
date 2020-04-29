@@ -126,6 +126,7 @@ public class TelaMonitoramento extends javax.swing.JFrame {
 
         ThreadCpu ThCpu = new ThreadCpu();
         ThreadMem ThMem = new ThreadMem();
+        ThreadDsk ThDsk = new ThreadDsk();
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -161,6 +162,7 @@ public class TelaMonitoramento extends javax.swing.JFrame {
             public void run() {
                 ThCpu.start();
                 ThMem.start();
+                ThDsk.start();
                 new TelaMonitoramento().setVisible(true);
             }
         });
