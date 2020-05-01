@@ -246,8 +246,8 @@
         }
 
         // Recent Report
-        const brandProduct = 'rgba(0,181,233,0.8)'
-        const brandService = 'rgba(0,173,95,0.8)'
+        const brandProduct = 'rgba(0,181,233)'
+        const brandService = 'rgb(250, 66, 81)'
 
         var elements = 12
         var data1 = [52, 60, 55, 50, 65, 80, 57, 70, 105, 102, 65, 84]
