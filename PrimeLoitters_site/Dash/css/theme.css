@@ -437,6 +437,7 @@ section {
 
 .login-form .form-group label {
     display: block;
+    margin-top: 20px;
 }
 
 .login-content {
@@ -3397,9 +3398,11 @@ section {
 
 .au-card-title {
     position: relative;
-    padding: 40px;
-    padding-top: 45px;
-    padding-bottom: 47px;
+    width: 100%;
+    height: 80px;
+    padding: 30px;
+    /* padding-top: 45px; */
+    /* padding-bottom: 47px; */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -4325,6 +4328,7 @@ section {
     line-height: 1;
     padding: 22px 40px;
     white-space: nowrap;
+    text-align: center;
 }
 
 .table-earning thead th.text-right {
@@ -4334,12 +4338,14 @@ section {
 
 .table-earning tbody td {
     color: #808080;
-    padding: 12px 40px;
+    /* padding: 12px 40px; */
+    text-align: center;
     white-space: nowrap;
 }
 
 .table-earning tbody td.text-right {
     padding-left: 15px;
+    text-align: center;
     padding-right: 65px;
 }
 
@@ -13298,7 +13304,7 @@ section {
 }
 
 .bg-overlay--blue {
-    background: rgba(49, 89, 253, 0.9);
+    background-image: -webkit-linear-gradient(90deg, #000000 0%, #00d150 100%);
 }
 
 .bg-c1 {
