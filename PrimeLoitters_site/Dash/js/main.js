@@ -1,4 +1,4 @@
-(function($) {
+﻿(function($) {
     // USE STRICT
     "use strict";
 
@@ -684,7 +684,7 @@
                     defaultFontFamily: 'Poppins',
                     datasets: [{
                         label: "Foods",
-                        data: [0, 30, 10, 120, 50, 63, 10],
+                        data: [0, 30, 10, 99, 50, 63, 10],
                         backgroundColor: 'transparent',
                         borderColor: 'rgba(220,53,69,0.75)',
                         borderWidth: 3,
@@ -694,7 +694,7 @@
                         pointBackgroundColor: 'rgba(220,53,69,0.75)',
                     }, {
                         label: "Electronics",
-                        data: [0, 50, 40, 80, 40, 79, 120],
+                        data: [0, 50, 40, 80, 40, 79, 99],
                         backgroundColor: 'transparent',
                         borderColor: 'rgba(40,167,69,0.75)',
                         borderWidth: 3,
@@ -1042,34 +1042,31 @@
 
     try {
 
-        //doughut chart
+        //doughut chart - MEMORIA
         var ctx = document.getElementById("doughutChart");
         if (ctx) {
-            ctx.height = 150;
+            ctx.height = 200;
             var myChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     datasets: [{
-                        data: [45, 25, 20, 10],
+                        data: [40, 25, 15],
                         backgroundColor: [
                             "rgba(0, 123, 255,0.9)",
                             "rgba(0, 123, 255,0.7)",
-                            "rgba(0, 123, 255,0.5)",
                             "rgba(0,0,0,0.07)"
                         ],
                         hoverBackgroundColor: [
                             "rgba(0, 123, 255,0.9)",
                             "rgba(0, 123, 255,0.7)",
-                            "rgba(0, 123, 255,0.5)",
                             "rgba(0,0,0,0.07)"
                         ]
 
                     }],
                     labels: [
-                        "Green",
-                        "Green",
-                        "Green",
-                        "Green"
+                        "Usuário",
+                        "Sistema",
+                        "Livre"
                     ]
                 },
                 options: {
@@ -1093,7 +1090,7 @@
 
     try {
 
-        //pie chart
+        //pie chart - ARMAZENAMENTO
         var ctx = document.getElementById("pieChart");
         if (ctx) {
             ctx.height = 200;
@@ -1101,25 +1098,20 @@
                 type: 'pie',
                 data: {
                     datasets: [{
-                        data: [45, 25, 20, 10],
+                        data: [45, 10],
                         backgroundColor: [
                             "rgba(0, 123, 255,0.9)",
-                            "rgba(0, 123, 255,0.7)",
-                            "rgba(0, 123, 255,0.5)",
                             "rgba(0,0,0,0.07)"
                         ],
                         hoverBackgroundColor: [
                             "rgba(0, 123, 255,0.9)",
-                            "rgba(0, 123, 255,0.7)",
-                            "rgba(0, 123, 255,0.5)",
                             "rgba(0,0,0,0.07)"
                         ]
 
                     }],
                     labels: [
-                        "Green",
-                        "Green",
-                        "Green"
+                        "Espaço usado",
+                        "Espaço livre"
                     ]
                 },
                 options: {
