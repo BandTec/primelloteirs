@@ -679,22 +679,12 @@
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ["2010", "2011", "2012", "2013", "2014", "2015", "2016"],
+                    labels: ["6h00", "8h00", "10h00", "12h00", "14h00", "16h00", "18h00", "20h00", "21h00", "23h00"],
                     type: 'line',
                     defaultFontFamily: 'Poppins',
                     datasets: [{
-                        label: "Foods",
-                        data: [0, 30, 10, 99, 50, 63, 10],
-                        backgroundColor: 'transparent',
-                        borderColor: 'rgba(220,53,69,0.75)',
-                        borderWidth: 3,
-                        pointStyle: 'circle',
-                        pointRadius: 5,
-                        pointBorderColor: 'transparent',
-                        pointBackgroundColor: 'rgba(220,53,69,0.75)',
-                    }, {
-                        label: "Electronics",
-                        data: [0, 50, 40, 80, 40, 79, 99],
+                        label: "Uso da CPU",
+                        data: [13, 32, 65, 93, 52, 68, 92, 85, 42, 22],
                         backgroundColor: 'transparent',
                         borderColor: 'rgba(40,167,69,0.75)',
                         borderWidth: 3,
@@ -747,7 +737,7 @@
                             },
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Value',
+                                labelString: 'Uso da CPU',
                                 fontFamily: "Poppins"
 
                             },
@@ -778,12 +768,12 @@
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ["2010", "2011", "2012", "2013", "2014", "2015", "2016"],
+                    labels: ["6h00", "8h00", "10h00", "12h00", "14h00", "16h00", "18h00", "20h00", "21h00", "23h00"],
                     type: 'line',
                     defaultFontFamily: 'Poppins',
                     datasets: [{
-                        data: [0, 7, 3, 5, 2, 10, 7],
-                        label: "Expense",
+                        data: [0, 17, 42, 78, 47, 41, 82, 43, 20, 4],
+                        label: "Uso do Disco",
                         backgroundColor: 'rgba(0,103,255,.15)',
                         borderColor: 'rgba(0,103,255,0.5)',
                         borderWidth: 3.5,
@@ -839,7 +829,7 @@
                             },
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Value',
+                                labelString: 'Uso do Disco',
                                 fontFamily: "Poppins"
                             },
                             ticks: {
