@@ -20,7 +20,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.time.DynamicTimeSeriesCollection;
 import org.jfree.data.time.Second;
-
+import br.com.kprunnin.classes.ThreadDsk;
 /**
  *
  * @author olive
@@ -37,8 +37,16 @@ public class KprunninGui extends javax.swing.JFrame {
 
     private final GraficoLinha graficoLinha;
     private final GraficoPizza graficoPizza;
-
+    
+    public static float[] dadosDsk = new float[1];
+    public static float[] dadosMem = new float[1];
+    public static float[] dadosCpu = new float[1];
+    
     private final Alerta alerta;
+    
+    public static int contagemErrosCpu;
+    public static int contagemErrosMem;
+    public static int contagemErrosDsk;
 
     public KprunninGui() {
         initComponents();
@@ -328,7 +336,7 @@ public class KprunninGui extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        ThreadDsk ThDsk = new ThreadDsk();
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -354,6 +362,7 @@ public class KprunninGui extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                ThDsk.start();
                 new KprunninGui().setVisible(true);
             }
         });
