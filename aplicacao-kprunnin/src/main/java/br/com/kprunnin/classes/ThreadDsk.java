@@ -18,6 +18,11 @@ public class ThreadDsk extends Thread {
         HWDiskStore[] disk = hal.getDiskStores();
         int numeroDaMedicao = 0;
         float filaResultado;
+        if (KprunninGui.timeTick < 5) {
+            KprunninGui.dadosDsk[0]++;
+            KprunninGui.timeTick++;
+            Util.sleep(1000);
+        }else {
         for (numeroDaMedicao = 0; numeroDaMedicao < filas.length; numeroDaMedicao++) {
             filas[numeroDaMedicao] = disk[0].getCurrentQueueLength();
             filaResultado = (float) (filas[0] + filas[1] + filas[2] + filas[3]) / (float) 4.0;
@@ -25,6 +30,7 @@ public class ThreadDsk extends Thread {
             KprunninGui.dadosDsk[0] = (float) filaSetada;
             Util.sleep(500);
 
+        }
         }
         run();
 
