@@ -5,6 +5,7 @@
  */
 package br.com.kprunnin.Gui;
 
+import br.com.kprunnin.classes.Alerta;
 import br.com.kprunnin.classes.GraficoLinha;
 import br.com.kprunnin.classes.GraficoPizza;
 import br.com.kprunnin.classes.InfoHardware;
@@ -30,13 +31,15 @@ public class KprunninGui extends javax.swing.JFrame {
 
     private final InfoHardware infoHardware;
     private final InfoMaquina infoMaquina;
-    
+
     private final DynamicTimeSeriesCollection datasetCpu;
     private final DynamicTimeSeriesCollection datasetDisco;
-    
+
     private final GraficoLinha graficoLinha;
     private final GraficoPizza graficoPizza;
-    
+
+    private final Alerta alerta;
+
     public KprunninGui() {
         initComponents();
 
@@ -47,72 +50,86 @@ public class KprunninGui extends javax.swing.JFrame {
 
         this.graficoLinha = new GraficoLinha(monitoramento.getCPU());
         this.graficoPizza = new GraficoPizza();
-        
+
         this.datasetCpu = new DynamicTimeSeriesCollection(1, 60, new Second());
         this.datasetDisco = new DynamicTimeSeriesCollection(1, 60, new Second());
-        
-        getInfoHardware();
-        getInfoMaquina();
-        
-        Date date = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
-        
-        this.datasetCpu.setTimeBase(new Second(date));
-        this.datasetCpu.addSeries(monitoramento.getCPU(), 0, "CPU");
-        
-        this.datasetDisco.setTimeBase(new Second(date));
-        this.datasetDisco.addSeries(monitoramento.getDisco(), 0, "Disco");
-        
-        graficoPizza.adicionaValor(String.format("Memoria em uso = %.2f",
-                    graficoPizza.getPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso())) + "%",
-                    monitoramento.getMemoriaEmUso());
-            
-            graficoPizza.adicionaValor(String.format("Memoria Livre = %.2f", 
-                    graficoPizza.getPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaLivre())) + "%",
-                    monitoramento.getMemoriaLivre());
-        
+
+        this.alerta = new Alerta();
+
+        getInfoEstaticas();
+
+        lblAlerta.setText("Numeros de alertas Registrados: ");
+
+        setValoresIniciais();
+
         atualizar();
     }
 
     private void atualizar() {
-        
+
         Timer timer = new Timer(50, e -> {
-            
+
             this.datasetCpu.advanceTime();
             this.datasetCpu.appendData(monitoramento.getCPU());
-            
+
             this.datasetDisco.advanceTime();
-            this.datasetDisco.appendData(monitoramento.getCPU());
-            
+            this.datasetDisco.appendData(monitoramento.getDisco());
+
             graficoPizza.limparDataset();
 
             graficoPizza.adicionaValor(String.format("Memoria em uso = %.2f",
                     graficoPizza.getPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso())) + "%",
                     monitoramento.getMemoriaEmUso());
-            
-            graficoPizza.adicionaValor(String.format("Memoria Livre = %.2f", 
+
+            graficoPizza.adicionaValor(String.format("Memoria Livre = %.2f",
                     graficoPizza.getPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaLivre())) + "%",
                     monitoramento.getMemoriaLivre());
+
+            alerta.lancarAlerta(monitoramento.getCPU()[0], monitoramento.getDisco()[0],
+                    alerta.pegaPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso()));
+
+            lblAlerta.setText("Numeros de Alertas Registrados: " + alerta.getErrosRegistrados());
             
             pnlGeral.updateUI();
-        
+
         });
         timer.start();
     }
 
-    private void getInfoHardware() {
+    private void getInfoEstaticas() {
 
-        lblHardware.setText(infoHardware.getEspacoHd() + infoHardware.getMemoria() + infoHardware.getProcessador());
+        lblMarca.setText("Montadora: " + infoMaquina.getMarca());
+        lblModelo.setText("Modelo: " + infoMaquina.getModelo());
+        lblNumeroSerie.setText("Numero de Série: " + infoMaquina.getNumeroDeSerie());
+        lblSistemaOperacional.setText("Sistema Operacional: " + infoMaquina.getSistemaOperacional());
+        lblArmazenamento.setText("Armazenamento Total: " + infoHardware.getEspacoHd());
+        lblMemoria.setText("Memoria total: " + infoHardware.getMemoria());
+        lblProcessador.setText("Informações do Processador: " + infoHardware.getProcessador());
 
     }
 
-    private void getInfoMaquina() {
+    private void setValoresIniciais() {
 
-        lblMaquina.setText(infoMaquina.getSistemaOperacional() + infoMaquina.getMarca() + infoMaquina.getModelo() + " " + infoMaquina.getNumeroDeSerie());
+        Date date = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+
+        this.datasetCpu.setTimeBase(new Second(date));
+        this.datasetCpu.addSeries(monitoramento.getCPU(), 0, "CPU");
+
+        this.datasetDisco.setTimeBase(new Second(date));
+        this.datasetDisco.addSeries(monitoramento.getCPU(), 0, "Disco");
+
+        graficoPizza.adicionaValor(String.format("Memoria em uso = %.2f",
+                graficoPizza.getPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso())) + "%",
+                monitoramento.getMemoriaEmUso());
+
+        graficoPizza.adicionaValor(String.format("Memoria Livre = %.2f",
+                graficoPizza.getPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaLivre())) + "%",
+                monitoramento.getMemoriaLivre());
 
     }
 
     private ChartPanel criaGraficoCpu() {
-        
+
         JFreeChart systemCpu = ChartFactory.createTimeSeriesChart("Uso da CPU", "Tempo", "% de uso da CPU", this.datasetCpu, true,
                 true, false);
         ChartPanel chartPanel = new ChartPanel(systemCpu);
@@ -122,14 +139,14 @@ public class KprunninGui extends javax.swing.JFrame {
     }
 
     private ChartPanel criaGraficoMemoria() {
-        
+
         ChartPanel chartPanel = graficoPizza.criaGraficoPizza(graficoPizza.getDataset(), "Uso da Memória");
         return chartPanel;
-        
+
     }
-    
+
     private ChartPanel criaGraficoDisco() {
-        
+
         JFreeChart graficoDisco = ChartFactory.createTimeSeriesChart("Uso do Disco", "Tempo", "% de uso da Disco", this.datasetDisco, true,
                 true, false);
         ChartPanel chartPanel = new ChartPanel(graficoDisco);
@@ -137,8 +154,8 @@ public class KprunninGui extends javax.swing.JFrame {
         return chartPanel;
     }
 
-    private void getGrafico(ChartPanel chartPanel){
-        
+    private void getGrafico(ChartPanel chartPanel) {
+
         chartPanel.setVisible(true);
         chartPanel.setSize(pnlGeral.getWidth(), pnlGeral.getHeight());
 
@@ -146,9 +163,9 @@ public class KprunninGui extends javax.swing.JFrame {
         pnlGeral.add(chartPanel);
         pnlGeral.revalidate();
         pnlGeral.repaint();
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -158,15 +175,19 @@ public class KprunninGui extends javax.swing.JFrame {
         btnCPU = new javax.swing.JButton();
         btnMemoria = new javax.swing.JButton();
         btnDisco = new javax.swing.JButton();
-        lblMaquina = new javax.swing.JLabel();
-        lblHardware = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblMarca = new javax.swing.JLabel();
+        lblModelo = new javax.swing.JLabel();
+        lblNumeroSerie = new javax.swing.JLabel();
+        lblSistemaOperacional = new javax.swing.JLabel();
+        lblArmazenamento = new javax.swing.JLabel();
+        lblMemoria = new javax.swing.JLabel();
+        lblProcessador = new javax.swing.JLabel();
         lblAlerta = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(0, 0));
 
         pnlGeral.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -174,11 +195,11 @@ public class KprunninGui extends javax.swing.JFrame {
         pnlGeral.setLayout(pnlGeralLayout);
         pnlGeralLayout.setHorizontalGroup(
             pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
+            .addGap(0, 488, Short.MAX_VALUE)
         );
         pnlGeralLayout.setVerticalGroup(
             pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 305, Short.MAX_VALUE)
+            .addGap(0, 304, Short.MAX_VALUE)
         );
 
         btnCPU.setText("Mostrar uso CPU");
@@ -202,30 +223,21 @@ public class KprunninGui extends javax.swing.JFrame {
             }
         });
 
-        lblMaquina.setText("jLabel1");
-        lblMaquina.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        lblMaquina.setAutoscrolls(true);
-        lblMaquina.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblMarca.setText("jLabel1");
 
-        lblHardware.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblHardware.setText("jLabel1");
-        lblHardware.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        lblHardware.setAutoscrolls(true);
-        lblHardware.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblModelo.setText("jLabel2");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Estado máquina");
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblNumeroSerie.setText("jLabel5");
 
-        lblAlerta.setText("jLabel5");
-        lblAlerta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblSistemaOperacional.setText("jLabel7");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("KPR");
-        jLabel6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblArmazenamento.setText("jLabel8");
+
+        lblMemoria.setText("jLabel9");
+
+        lblProcessador.setText("jLabel10");
+
+        lblAlerta.setText("jLabel11");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,49 +247,66 @@ public class KprunninGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblProcessador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(325, 325, 325))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAlerta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCPU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnMemoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDisco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblMemoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSistemaOperacional)
+                                    .addComponent(lblMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlGeral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblHardware, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                            .addComponent(lblModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblArmazenamento, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNumeroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(btnCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDisco, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(pnlGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(lblMaquina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMarca)
+                    .addComponent(lblModelo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblAlerta, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(lblHardware, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCPU)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnMemoria)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDisco)
-                        .addGap(170, 170, 170)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSistemaOperacional)
+                    .addComponent(lblNumeroSerie))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblArmazenamento)
+                    .addComponent(lblMemoria))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblProcessador)
+                .addGap(9, 9, 9)
+                .addComponent(lblAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCPU)
+                    .addComponent(btnMemoria)
+                    .addComponent(btnDisco))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -334,12 +363,15 @@ public class KprunninGui extends javax.swing.JFrame {
     private javax.swing.JButton btnCPU;
     private javax.swing.JButton btnDisco;
     private javax.swing.JButton btnMemoria;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lblAlerta;
-    private javax.swing.JLabel lblHardware;
-    private javax.swing.JLabel lblMaquina;
+    private javax.swing.JLabel lblArmazenamento;
+    private javax.swing.JLabel lblMarca;
+    private javax.swing.JLabel lblMemoria;
+    private javax.swing.JLabel lblModelo;
+    private javax.swing.JLabel lblNumeroSerie;
+    private javax.swing.JLabel lblProcessador;
+    private javax.swing.JLabel lblSistemaOperacional;
     private javax.swing.JPanel pnlGeral;
     // End of variables declaration//GEN-END:variables
 }

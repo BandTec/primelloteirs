@@ -32,8 +32,9 @@ public class InfoHardware {
     }
 
     public String getProcessador() {
-        String processador = String.valueOf(this.infoProcessador);
-        return processador;
+        String processadorParte1 = String.valueOf(this.infoProcessador);
+        String[] processadorParte2 = processadorParte1.split("1 p");
+        return processadorParte2[0];
     }
 
     public String getMemoria() {

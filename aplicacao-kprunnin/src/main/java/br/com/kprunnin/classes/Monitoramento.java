@@ -73,7 +73,7 @@ public class Monitoramento {
             this.filas[numeroDaMedicao] = disk[0].getCurrentQueueLength();
             filaResultado = (float) (filas[0] + filas[1] + filas[2] + filas[3]) / (float) 4.0;
             this.filaSetada = (int) (filaResultado * 20);
-            Util.sleep(500);
+            //Util.sleep(500);
         }
         
         float [] usoDisco = new float[1];
