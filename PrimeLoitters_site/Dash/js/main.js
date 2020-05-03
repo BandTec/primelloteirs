@@ -683,8 +683,8 @@
                     type: 'line',
                     defaultFontFamily: 'Poppins',
                     datasets: [{
-                        label: "Uso da CPU",
-                        data: [13, 32, 65, 93, 52, 68, 92, 85, 42, 22],
+                        label: "Uso da CPU em %",
+                        data: [9, 32, 65, 93, 52, 68, 92, 85, 42, 22],
                         backgroundColor: 'transparent',
                         borderColor: 'rgba(40,167,69,0.75)',
                         borderWidth: 3,
@@ -737,7 +737,7 @@
                             },
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Uso da CPU',
+                                labelString: 'Uso da CPU em %',
                                 fontFamily: "Poppins"
 
                             },
@@ -772,8 +772,8 @@
                     type: 'line',
                     defaultFontFamily: 'Poppins',
                     datasets: [{
-                        data: [0, 17, 42, 78, 47, 41, 82, 43, 20, 4],
-                        label: "Uso do Disco",
+                        data: [0, 17, 42, 91, 47, 41, 82, 43, 20, 4],
+                        label: "Uso do Disco em %",
                         backgroundColor: 'rgba(0,103,255,.15)',
                         borderColor: 'rgba(0,103,255,0.5)',
                         borderWidth: 3.5,
@@ -829,7 +829,7 @@
                             },
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Uso do Disco',
+                                labelString: 'Uso do Disco em %',
                                 fontFamily: "Poppins"
                             },
                             ticks: {
@@ -1040,23 +1040,23 @@
                 type: 'doughnut',
                 data: {
                     datasets: [{
-                        data: [40, 25, 15],
+                        data: [74, 26],
                         backgroundColor: [
-                            "rgba(0, 123, 255,0.9)",
+                            "rgba(40,167,69,0.7)",
                             "rgba(0, 123, 255,0.7)",
                             "rgba(0,0,0,0.07)"
                         ],
                         hoverBackgroundColor: [
-                            "rgba(0, 123, 255,0.9)",
-                            "rgba(0, 123, 255,0.7)",
+                            "rgba(40,167,69,0.85)",
+                            "rgba(0, 123, 255,0.85)",
                             "rgba(0,0,0,0.07)"
                         ]
 
                     }],
                     labels: [
-                        "Usuário",
-                        "Sistema",
-                        "Livre"
+                        "Memória em Uso em %",
+                        "Memória Livre em %",
+                        
                     ]
                 },
                 options: {
@@ -1088,20 +1088,20 @@
                 type: 'pie',
                 data: {
                     datasets: [{
-                        data: [45, 10],
+                        data: [45, 55],
                         backgroundColor: [
-                            "rgba(0, 123, 255,0.9)",
-                            "rgba(0,0,0,0.07)"
+                            "rgba(40,167,69,0.7)",
+                            "rgba(0, 123, 255,0.7)",
                         ],
                         hoverBackgroundColor: [
-                            "rgba(0, 123, 255,0.9)",
-                            "rgba(0,0,0,0.07)"
+                            "rgba(40,167,69,0.85)",
+                            "rgba(0, 123, 255,0.85)",
                         ]
 
                     }],
                     labels: [
-                        "Espaço usado",
-                        "Espaço livre"
+                        "Espaço usado em %",
+                        "Espaço livre em %"
                     ]
                 },
                 options: {
