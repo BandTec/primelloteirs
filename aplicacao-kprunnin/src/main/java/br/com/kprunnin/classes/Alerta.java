@@ -67,18 +67,18 @@ public class Alerta {
         }
 
         if (this.contagemErrosCpu > 10) {
-            PlayErro();
+            //PlayErro();
             this.errosRegistrados++;
             //Registrar erro
         }
 
         if (this.contagemErrosMemoria > 20) {
-            PlayErro();
+            //PlayErro();
             this.errosRegistrados++;
             //Registrar erro
         }
         if (this.contagemErrosDisco > 20) {
-            PlayErro();
+            //PlayErro();
             this.errosRegistrados++;
             //Registrar erro
         }

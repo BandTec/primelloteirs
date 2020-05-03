@@ -70,14 +70,17 @@ public class TelaMonitoramento extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblCpu.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblCpu.setForeground(new java.awt.Color(255, 255, 255));
         lblCpu.setText("CPU usada:");
         getContentPane().add(lblCpu, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 75, 119, 28));
 
+        lblMemoria.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblMemoria.setForeground(new java.awt.Color(255, 255, 255));
         lblMemoria.setText("Memória usada:");
         getContentPane().add(lblMemoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 121, 119, 28));
 
+        lblDisco.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblDisco.setForeground(new java.awt.Color(255, 255, 255));
         lblDisco.setText("Disco usado:");
         getContentPane().add(lblDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 167, 119, 28));
@@ -97,14 +100,15 @@ public class TelaMonitoramento extends javax.swing.JFrame {
         barDisco.setStringPainted(true);
         getContentPane().add(barDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 174, 200, -1));
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("DilleniaUPC", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Desempenho da máquina");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swingprojeto/call.jpg"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-200, -850, 580, 1150));
+        jLabel2.setFocusable(false);
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 280));
 
         jMenu1.setText("Janelas");
 
