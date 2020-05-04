@@ -1,0 +1,15 @@
+br\com\kprunnin\classes\Alerta.class
+br\com\kprunnin\classes\Monitoramento.class
+br\com\kprunnin\Gui\KprunninGui.class
+br\com\kprunnin\Gui\KprunninGui$4.class
+br\com\kprunnin\classes\GraficoLinha.class
+br\com\kprunnin\Gui\KprunninGui$3.class
+br\com\kprunnin\classes\Toolbox.class
+br\com\kprunnin\classes\GraficoPizza.class
+br\com\kprunnin\Gui\KprunninGui$2.class
+br\com\kprunnin\classes\InfoHardware.class
+br\com\kprunnin\classes\ThreadCpu.class
+br\com\kprunnin\classes\InfoMaquina.class
+br\com\kprunnin\Gui\KprunninGui$1.class
+.netbeans_automatic_build
+br\com\kprunnin\classes\ThreadDsk.class
