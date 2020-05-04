@@ -8,11 +8,10 @@ package br.com.kprunnin.classes;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
-import oshi.hardware.HWDiskStore;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.FileSystem;
-//import oshi.software.os.OSFileStore;
-//import oshi.util.FormatUtil;
+import oshi.software.os.OSFileStore;
+import oshi.util.FormatUtil;
 
 /**
  *
@@ -48,12 +47,10 @@ public class InfoHardware {
     }
 
     public String getEspacoHd() {
-        /*OSFileStore[] fileStores = arquivosSistema.getFileStores();
+        OSFileStore[] fileStores = arquivosSistema.getFileStores();
         long total = fileStores[0].getTotalSpace();
         String espacoHd = FormatUtil.formatBytes(total);
-        return espacoHd;*/
-        HWDiskStore[] disk = hal.getDiskStores();
-        return (disk[0].getSize() / 1073741824) + " GB";
+        return espacoHd;
     }
 
     @Override

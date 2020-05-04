@@ -5,6 +5,7 @@
  */
 package br.com.kprunnin.classes;
 
+import java.util.Locale;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -21,34 +22,34 @@ public class GraficoPizza {
     
     private DefaultPieDataset dataset;
     
-    public GraficoPizza(){
+    public GraficoPizza() {
         this.dataset = new DefaultPieDataset();
     }
     
-    public void adicionaValor(Comparable legenda, Number valor){
+    public void adicionaValor(Comparable legenda, Number valor) {
         this.dataset.setValue(legenda, valor);
     }
     
-    public DefaultPieDataset getDataset(){
+    public DefaultPieDataset getDataset() {
         return this.dataset;
-    } 
+    }    
     
     public double getPorcentagem(float valorTotal, float valorADescobrir) {
         long total = (long) valorTotal;
         long qualQuero = (long) valorADescobrir;
-
+        
         return (double) (qualQuero * 100) / total;
     }
-
+    
     public void limparDataset() {
         this.dataset.clear();
     }
     
-    public ChartPanel criaGraficoPizza(DefaultPieDataset dataset,String titulo){
-  
-        JFreeChart grafico = ChartFactory.createPieChart3D(titulo, dataset);
-        ChartPanel myChartPanel = new ChartPanel(grafico); 
-        return myChartPanel;
+    public ChartPanel criaGraficoPizza(DefaultPieDataset dataset, String titulo) {
+        
+        JFreeChart grafico = ChartFactory.createPieChart3D(titulo, dataset, true, true, Locale.forLanguageTag("pt-BR"));
+        ChartPanel chartPanel = new ChartPanel(grafico);
+        return chartPanel;
         
     }
     
