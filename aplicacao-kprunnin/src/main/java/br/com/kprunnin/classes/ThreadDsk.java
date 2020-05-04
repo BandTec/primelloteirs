@@ -25,6 +25,7 @@ public class ThreadDsk extends Thread {
         //KprunninGui.lblDisco.setText(String.format(" s %d", (int)((disco[0].getTotalSpace() - disco[0].getFreeSpace()) / disco[0].getTotalSpace()) * 100));
         Double espacoLivre = (double) disco[0].getFreeSpace() / 1073741824;
         Double espacoTotal = (double) disco[0].getTotalSpace() / 1073741824;
+        KprunninGui.lblArmazenamento.setText("Armazenamento Total: " + (disk[0].getSize() / 1073741824) +  " GB");
         int espacoUsado = (int) Math.round(((espacoTotal - espacoLivre) / espacoTotal) * 100);
         //KprunninGui.usoDsk = (int)(disco[0].getTotalSpace() - disco[0].getFreeSpace() / disco[0].getTotalSpace()) * 100;
         //KprunninGui.usoDsk = (int)(disco[0].getTotalSpace() - disco[0].getFreeSpace() / disco[0].getTotalSpace()) * 100;

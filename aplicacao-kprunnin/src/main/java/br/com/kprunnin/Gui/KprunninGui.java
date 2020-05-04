@@ -38,7 +38,6 @@ public class KprunninGui extends javax.swing.JFrame {
 
     private final GraficoLinha graficoLinha;
     private final GraficoPizza graficoPizza;
-<<<<<<< HEAD
     
     private String index1 = "Memoria em uso";
     private String index2 = "memoria livre";
@@ -47,15 +46,7 @@ public class KprunninGui extends javax.swing.JFrame {
     public static float[] dadosMem = new float[1];
     public static float[] dadosCpu = new float[1];
     public static int usoDsk = 0;
-=======
 
-    private String index1 = "Memoria em uso";
-    private String index2 = "memoria livre";
-
-    public static float[] dadosDsk = {10};
-    public static float[] dadosMem = new float[1];
-    public static float[] dadosCpu = new float[1];
->>>>>>> 2144a74c66d100aff26b07a66ca9f4fc6471057a
     public static int timeTick = 0;
 
     private final Alerta alerta;
@@ -121,7 +112,6 @@ public class KprunninGui extends javax.swing.JFrame {
         lblModelo.setText("Modelo: " + infoMaquina.getModelo());
         lblNumeroSerie.setText("Numero de Série: " + infoMaquina.getNumeroDeSerie());
         lblSistemaOperacional.setText("Sistema Operacional: " + infoMaquina.getSistemaOperacional());
-        lblArmazenamento.setText("Armazenamento Total: " + infoHardware.getEspacoHd());
         lblMemoria.setText("Memoria total: " + infoHardware.getMemoria());
         lblProcessador.setText("Informações do Processador: " + infoHardware.getProcessador());
 
@@ -140,10 +130,7 @@ public class KprunninGui extends javax.swing.JFrame {
         graficoPizza.adicionaValor(this.index1, monitoramento.getMemoriaEmUso());
 
         graficoPizza.adicionaValor(this.index2, monitoramento.getMemoriaLivre());
-<<<<<<< HEAD
-        
-=======
->>>>>>> 2144a74c66d100aff26b07a66ca9f4fc6471057a
+
 
     }
 
@@ -204,6 +191,7 @@ public class KprunninGui extends javax.swing.JFrame {
         lblMemoria = new javax.swing.JLabel();
         lblProcessador = new javax.swing.JLabel();
         lblAlerta = new javax.swing.JLabel();
+        fundo = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
 
@@ -241,7 +229,7 @@ public class KprunninGui extends javax.swing.JFrame {
                 btnCPUActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCPU, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 180, -1));
+        getContentPane().add(btnCPU, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 180, -1));
 
         btnMemoria.setText("Mostrar uso Memória");
         btnMemoria.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +237,7 @@ public class KprunninGui extends javax.swing.JFrame {
                 btnMemoriaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMemoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 170, -1));
+        getContentPane().add(btnMemoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 170, -1));
 
         btnDisco.setText("Mostrar uso de Disco");
         btnDisco.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +245,7 @@ public class KprunninGui extends javax.swing.JFrame {
                 btnDiscoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 170, -1));
+        getContentPane().add(btnDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 170, -1));
 
         lblMarca.setForeground(new java.awt.Color(255, 255, 255));
         lblMarca.setText("jLabel1");
@@ -290,6 +278,10 @@ public class KprunninGui extends javax.swing.JFrame {
         lblAlerta.setForeground(new java.awt.Color(255, 255, 255));
         lblAlerta.setText("jLabel11");
         getContentPane().add(lblAlerta, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 103, 245, 19));
+
+        fundo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ramon\\Desktop\\primeloitters\\PrimeLoitters_site\\img\\fundo.jpg")); // NOI18N
+        fundo.setText("jLabel1");
+        getContentPane().add(fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -356,9 +348,10 @@ public class KprunninGui extends javax.swing.JFrame {
     private javax.swing.JButton btnCPU;
     private javax.swing.JButton btnDisco;
     private javax.swing.JButton btnMemoria;
+    private javax.swing.JLabel fundo;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblAlerta;
-    private javax.swing.JLabel lblArmazenamento;
+    public static javax.swing.JLabel lblArmazenamento;
     public static javax.swing.JLabel lblDisco;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblMemoria;
