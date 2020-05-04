@@ -64,6 +64,7 @@ public class Monitoramento {
         double d = (double) cpuEmUso;
         cpu[0] = (float) (d);
         return cpu;
+        
     }
 
     public float[] getDisco() {

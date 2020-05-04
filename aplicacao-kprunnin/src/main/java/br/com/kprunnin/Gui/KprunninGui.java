@@ -41,7 +41,8 @@ public class KprunninGui extends javax.swing.JFrame {
     public static float[] dadosDsk = {10};
     public static float[] dadosMem = new float[1];
     public static float[] dadosCpu = new float[1];
-        public static int timeTick = 0;
+    public static Integer porcentoDsk = 0;
+    public static int timeTick = 0;
         
     private final Alerta alerta;
     
