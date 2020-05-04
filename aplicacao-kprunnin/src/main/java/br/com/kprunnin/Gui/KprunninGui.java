@@ -38,10 +38,13 @@ public class KprunninGui extends javax.swing.JFrame {
     private final GraficoLinha graficoLinha;
     private final GraficoPizza graficoPizza;
     
+    private String index1 = "Memoria em uso";
+    private String index2 = "memoria livre";
+    
     public static float[] dadosDsk = {10};
     public static float[] dadosMem = new float[1];
     public static float[] dadosCpu = new float[1];
-    public static Integer porcentoDsk = 0;
+    public static int usoDsk = 0;
     public static int timeTick = 0;
         
     private final Alerta alerta;
@@ -69,7 +72,9 @@ public class KprunninGui extends javax.swing.JFrame {
         getInfoEstaticas();
 
         lblAlerta.setText("Numeros de alertas Registrados: ");
-
+        barraDsk.setMaximum(101);
+        barraDsk.setMinimum(0);
+        barraDsk.setValue(0);
         setValoresIniciais();
 
         atualizar();
@@ -85,21 +90,14 @@ public class KprunninGui extends javax.swing.JFrame {
             this.datasetDisco.advanceTime();
             this.datasetDisco.appendData(monitoramento.getDisco());
 
-            graficoPizza.limparDataset();
-
-            graficoPizza.adicionaValor(String.format("Memoria em uso = %.2f",
-                    graficoPizza.getPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso())) + "%",
-                    monitoramento.getMemoriaEmUso());
-
-            graficoPizza.adicionaValor(String.format("Memoria Livre = %.2f",
-                    graficoPizza.getPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaLivre())) + "%",
-                    monitoramento.getMemoriaLivre());
+            graficoPizza.getDataset().setValue(this.index1, monitoramento.getMemoriaEmUso());
+            graficoPizza.getDataset().setValue(this.index2, monitoramento.getMemoriaLivre());
 
             alerta.lancarAlerta(monitoramento.getCPU()[0], monitoramento.getDisco()[0],
                     alerta.pegaPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso()));
 
             lblAlerta.setText("Numeros de Alertas Registrados: " + alerta.getErrosRegistrados());
-            
+
             pnlGeral.updateUI();
 
         });
@@ -128,13 +126,10 @@ public class KprunninGui extends javax.swing.JFrame {
         this.datasetDisco.setTimeBase(new Second(date));
         this.datasetDisco.addSeries(monitoramento.getCPU(), 0, "Disco");
 
-        graficoPizza.adicionaValor(String.format("Memoria em uso = %.2f",
-                graficoPizza.getPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso())) + "%",
-                monitoramento.getMemoriaEmUso());
+        graficoPizza.adicionaValor(this.index1, monitoramento.getMemoriaEmUso());
 
-        graficoPizza.adicionaValor(String.format("Memoria Livre = %.2f",
-                graficoPizza.getPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaLivre())) + "%",
-                monitoramento.getMemoriaLivre());
+        graficoPizza.adicionaValor(this.index2, monitoramento.getMemoriaLivre());
+        
 
     }
 
@@ -181,6 +176,8 @@ public class KprunninGui extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
+        lblDisco = new javax.swing.JLabel();
+        barraDsk = new javax.swing.JProgressBar();
         pnlGeral = new javax.swing.JPanel();
         btnCPU = new javax.swing.JButton();
         btnMemoria = new javax.swing.JButton();
@@ -198,8 +195,17 @@ public class KprunninGui extends javax.swing.JFrame {
         jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblDisco.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblDisco.setForeground(new java.awt.Color(255, 255, 255));
+        lblDisco.setText("Espaço em disco usado:");
+        getContentPane().add(lblDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 220, -1));
+
+        barraDsk.setForeground(new java.awt.Color(51, 100, 255));
+        barraDsk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        barraDsk.setStringPainted(true);
+        getContentPane().add(barraDsk, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 470, 30));
 
         pnlGeral.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -211,10 +217,10 @@ public class KprunninGui extends javax.swing.JFrame {
         );
         pnlGeralLayout.setVerticalGroup(
             pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 304, Short.MAX_VALUE)
+            .addGap(0, 228, Short.MAX_VALUE)
         );
 
-        getContentPane().add(pnlGeral, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 166, -1, -1));
+        getContentPane().add(pnlGeral, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, 230));
 
         btnCPU.setText("Mostrar uso CPU");
         btnCPU.addActionListener(new java.awt.event.ActionListener() {
@@ -280,15 +286,21 @@ public class KprunninGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCPUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPUActionPerformed
-        getGrafico(criaGraficoCpu());
+        getGrafico(criaGraficoCpu());        
+        barraDsk.setVisible(false);
+        KprunninGui.lblDisco.setVisible(false);
     }//GEN-LAST:event_btnCPUActionPerformed
 
     private void btnMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemoriaActionPerformed
         getGrafico(criaGraficoMemoria());
+        barraDsk.setVisible(false);
+        KprunninGui.lblDisco.setVisible(false);
     }//GEN-LAST:event_btnMemoriaActionPerformed
 
     private void btnDiscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscoActionPerformed
         getGrafico(criaGraficoDisco());
+        barraDsk.setVisible(true);
+        KprunninGui.lblDisco.setVisible(true);
     }//GEN-LAST:event_btnDiscoActionPerformed
 
     /**
@@ -323,11 +335,15 @@ public class KprunninGui extends javax.swing.JFrame {
             public void run() {
                 ThDsk.start();
                 new KprunninGui().setVisible(true);
+                KprunninGui.barraDsk.setVisible(false);
+                KprunninGui.lblDisco.setVisible(false);
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JProgressBar barraDsk;
     private javax.swing.JButton btnCPU;
     private javax.swing.JButton btnDisco;
     private javax.swing.JButton btnMemoria;
@@ -335,6 +351,7 @@ public class KprunninGui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblAlerta;
     private javax.swing.JLabel lblArmazenamento;
+    public static javax.swing.JLabel lblDisco;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblMemoria;
     private javax.swing.JLabel lblModelo;

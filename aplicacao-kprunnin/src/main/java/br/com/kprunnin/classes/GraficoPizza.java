@@ -5,6 +5,7 @@
  */
 package br.com.kprunnin.classes;
 
+import java.util.Locale;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -44,11 +45,11 @@ public class GraficoPizza {
         this.dataset.clear();
     }
     
-    public ChartPanel criaGraficoPizza(DefaultPieDataset dataset,String titulo){
-  
-        JFreeChart grafico = ChartFactory.createPieChart3D(titulo, dataset);
-        ChartPanel myChartPanel = new ChartPanel(grafico); 
-        return myChartPanel;
+    public ChartPanel criaGraficoPizza(DefaultPieDataset dataset, String titulo) {
+        
+        JFreeChart grafico = ChartFactory.createPieChart3D(titulo, dataset, true, true, Locale.forLanguageTag("pt-BR"));
+        ChartPanel chartPanel = new ChartPanel(grafico);
+        return chartPanel;
         
     }
     
