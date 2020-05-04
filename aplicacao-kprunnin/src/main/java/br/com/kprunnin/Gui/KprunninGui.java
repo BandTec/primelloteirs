@@ -38,6 +38,7 @@ public class KprunninGui extends javax.swing.JFrame {
 
     private final GraficoLinha graficoLinha;
     private final GraficoPizza graficoPizza;
+<<<<<<< HEAD
     
     private String index1 = "Memoria em uso";
     private String index2 = "memoria livre";
@@ -46,7 +47,15 @@ public class KprunninGui extends javax.swing.JFrame {
     public static float[] dadosMem = new float[1];
     public static float[] dadosCpu = new float[1];
     public static int usoDsk = 0;
+=======
 
+    private String index1 = "Memoria em uso";
+    private String index2 = "memoria livre";
+
+    public static float[] dadosDsk = {10};
+    public static float[] dadosMem = new float[1];
+    public static float[] dadosCpu = new float[1];
+>>>>>>> 2144a74c66d100aff26b07a66ca9f4fc6471057a
     public static int timeTick = 0;
 
     private final Alerta alerta;
@@ -131,6 +140,10 @@ public class KprunninGui extends javax.swing.JFrame {
         graficoPizza.adicionaValor(this.index1, monitoramento.getMemoriaEmUso());
 
         graficoPizza.adicionaValor(this.index2, monitoramento.getMemoriaLivre());
+<<<<<<< HEAD
+        
+=======
+>>>>>>> 2144a74c66d100aff26b07a66ca9f4fc6471057a
 
     }
 
