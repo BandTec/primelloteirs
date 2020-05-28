@@ -279,8 +279,11 @@ public class KprunninGui extends javax.swing.JFrame {
         lblAlerta.setText("jLabel11");
         getContentPane().add(lblAlerta, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 103, 245, 19));
 
-        fundo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ramon\\Desktop\\primeloitters\\PrimeLoitters_site\\img\\fundo.jpg")); // NOI18N
-        fundo.setText("jLabel1");
+        fundo.setBackground(new java.awt.Color(0, 0, 0));
+        fundo.setFont(new java.awt.Font("Tahoma", 0, 1000)); // NOI18N
+        fundo.setText(".");
+        fundo.setIconTextGap(0);
+        fundo.setOpaque(true);
         getContentPane().add(fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 500));
 
         pack();
