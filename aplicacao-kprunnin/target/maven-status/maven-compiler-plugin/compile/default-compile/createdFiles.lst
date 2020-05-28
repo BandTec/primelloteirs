@@ -11,5 +11,4 @@ br\com\kprunnin\classes\InfoHardware.class
 br\com\kprunnin\classes\ThreadCpu.class
 br\com\kprunnin\classes\InfoMaquina.class
 br\com\kprunnin\Gui\KprunninGui$1.class
-.netbeans_automatic_build
 br\com\kprunnin\classes\ThreadDsk.class
