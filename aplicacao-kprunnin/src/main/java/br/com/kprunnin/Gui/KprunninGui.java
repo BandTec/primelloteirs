@@ -177,6 +177,7 @@ public class KprunninGui extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         lblDisco = new javax.swing.JLabel();
         barraDsk = new javax.swing.JProgressBar();
         pnlGeral = new javax.swing.JPanel();
@@ -195,13 +196,24 @@ public class KprunninGui extends javax.swing.JFrame {
 
         jLabel4.setText("jLabel4");
 
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblDisco.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblDisco.setForeground(new java.awt.Color(255, 255, 255));
         lblDisco.setText("Espaço em disco usado:");
-        getContentPane().add(lblDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 220, -1));
+        getContentPane().add(lblDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 190, -1));
 
         barraDsk.setForeground(new java.awt.Color(51, 100, 255));
         barraDsk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -309,8 +321,9 @@ public class KprunninGui extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.Exception
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
         ThreadDsk ThDsk = new ThreadDsk();
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -352,6 +365,7 @@ public class KprunninGui extends javax.swing.JFrame {
     private javax.swing.JButton btnDisco;
     private javax.swing.JButton btnMemoria;
     private javax.swing.JLabel fundo;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblAlerta;
     public static javax.swing.JLabel lblArmazenamento;
