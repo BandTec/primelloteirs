@@ -23,8 +23,10 @@ public class DadoDAO {
         this.connection = connection;
     }
 
-    public void insert(Dado dado) throws SQLException {
-        System.out.println("conexao insert dado");
+    public boolean insert(Dado dado) throws SQLException {
+        
+        boolean insertRealizado = false;
+        
         String insertSql = "INSERT INTO kprDado (dataHora, dadosCpu, dadosMemoria, dadosDisco,fkMaquina)VALUES "
                 + "(CURRENT_TIMESTAMP AT TIME ZONE 'Tocantins Standard Time',?,?,?,?);";
 
@@ -40,7 +42,10 @@ public class DadoDAO {
             ps.setInt(4, dado.getChaveEstrangeira());
             
             ps.execute();
+            insertRealizado = true;
         }
+        
+        return insertRealizado;
     }
     
     

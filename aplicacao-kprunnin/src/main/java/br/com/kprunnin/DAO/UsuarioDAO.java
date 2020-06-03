@@ -25,7 +25,7 @@ public class UsuarioDAO {
     }
 
     public Usuario select(Usuario usuario) throws SQLException {
-        System.out.println("conexao select usuario");
+
         String insertSql = "select * from kprUsuario as u where u.login = ? and u.senha = ?;";
         
         try (PreparedStatement ps = connection.prepareStatement(insertSql)) {

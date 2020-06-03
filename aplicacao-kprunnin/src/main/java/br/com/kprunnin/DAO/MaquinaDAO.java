@@ -25,7 +25,7 @@ public class MaquinaDAO {
     }
 
     public Maquina select(Estabelecimento estabelecimento, String codigoMaquina) throws SQLException {
-        System.out.println("conexao select maquina");
+
         String insertSql = "select m.IdMaquina, m.tipoMaquina,m.codigoMaquina, m.numeroSerie," +
                             " m.memoria, m.valorCpu, m.disco, m.fkEstabelecimento \n" +
                             "from kprMaquina as m inner join kprEstabelecimento as e " +

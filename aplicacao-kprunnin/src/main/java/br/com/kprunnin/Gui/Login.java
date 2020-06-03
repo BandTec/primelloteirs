@@ -5,6 +5,11 @@
  */
 package br.com.kprunnin.Gui;
 
+import br.com.kprunnin.conexaoBanco.ConexaoBanco;
+import br.com.kprunnin.conexaoBanco.ConnectionFactory;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 /**
  *
  * @author Ramon
@@ -27,54 +32,40 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtEmail = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JPasswordField();
-        btnLogin = new javax.swing.JButton();
-        lblEsqueciSenha = new javax.swing.JLabel();
-        btnCad = new javax.swing.JButton();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        lblLogin = new javax.swing.JLabel();
+        lblSenha = new javax.swing.JLabel();
+        btnConfigurar = new javax.swing.JButton();
+        lblEstabelecimento = new javax.swing.JLabel();
+        lblMaquina = new javax.swing.JLabel();
+        tfdSenha = new javax.swing.JPasswordField();
+        tfdLogin = new javax.swing.JTextField();
+        tfdCodigoEstab = new javax.swing.JTextField();
+        tfdCodigoMaquina = new javax.swing.JTextField();
+        lblMensagem = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
+        jPasswordField1.setText("jPasswordField1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtEmail.setText("kpr@pl.com.br");
-        txtEmail.setToolTipText("");
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+        lblLogin.setText("Login");
+
+        lblSenha.setText("Senha");
+
+        btnConfigurar.setText("Configurar");
+        btnConfigurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
+                btnConfigurarActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Email");
+        lblEstabelecimento.setText("Código do Estabelecimento");
 
-        jLabel2.setText("Senha");
-
-        txtSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSenhaActionPerformed(evt);
-            }
-        });
-
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-
-        lblEsqueciSenha.setForeground(new java.awt.Color(0, 51, 255));
-        lblEsqueciSenha.setText("Esqueceu sua senha?");
-        lblEsqueciSenha.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblEsqueciSenhaMouseClicked(evt);
-            }
-        });
-
-        btnCad.setText("Cadastre-se");
+        lblMaquina.setText("Código da Máquina");
 
         jMenu1.setText("Início");
         jMenuBar1.add(jMenu1);
@@ -89,71 +80,99 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblEstabelecimento)
+                        .addGap(66, 66, 66))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblSenha)
+                        .addGap(116, 116, 116))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addComponent(jLabel2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(23, 23, 23)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfdLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                                    .addComponent(tfdSenha, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(tfdCodigoEstab, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtEmail)
-                                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(tfdCodigoMaquina, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                                .addComponent(lblMensagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(lblEsqueciSenha))
+                        .addGap(86, 86, 86)
+                        .addComponent(lblMaquina))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCad)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGap(118, 118, 118)
+                        .addComponent(lblLogin))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(btnConfigurar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addContainerGap()
+                .addComponent(lblLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(tfdLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogin)
-                    .addComponent(btnCad))
-                .addGap(18, 18, 18)
-                .addComponent(lblEsqueciSenha))
+                .addComponent(lblSenha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfdSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEstabelecimento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfdCodigoEstab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMaquina)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfdCodigoMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnConfigurar)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
+    private void btnConfigurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigurarActionPerformed
+        
+        Integer lengthLogin = tfdLogin.getText().length();
+        Integer lengthSenha = tfdSenha.getPassword().length;
+        Integer lengthCodigoEstab = tfdCodigoEstab.getText().length();
+        Integer lengthCodigoMaquina = tfdCodigoMaquina.getText().length();
+        
+        boolean configurado = false;
+        
+        if(lengthLogin <= 5 && lengthSenha <= 5 && lengthCodigoEstab <= 10 && lengthCodigoMaquina <= 5){
+            System.out.println("Não deu certo");
+            lblMensagem.setText("Todos os campos devem estar preenchidos");
 
-    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSenhaActionPerformed
-
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        if ("kpr@pl.com.br".equals(txtEmail.getText())) {
-            Maquina maq = new Maquina();
-            maq.setVisible(true);
+        } else {
+            System.out.println("Deu certo");
             
+            try(Connection connection = new ConnectionFactory().getConnection()){
+                
+                ConexaoBanco cb = new ConexaoBanco();
+                
+                configurado = cb.configuraConexao(tfdLogin.getText(), String.copyValueOf(tfdSenha.getPassword()),
+                        tfdCodigoEstab.getText(), tfdCodigoMaquina.getText());
+            } catch (SQLException ex) {
+                lblMensagem.setText("Campos inválidos, tente novamente");
+            }
         }
-    }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void lblEsqueciSenhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEsqueciSenhaMouseClicked
-     
-    }//GEN-LAST:event_lblEsqueciSenhaMouseClicked
+        
+        System.out.println("Configurado: " + configurado);
+    }//GEN-LAST:event_btnConfigurarActionPerformed
 
         
     public static void main(String args[]) {
@@ -190,16 +209,20 @@ public class Login extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCad;
-    private javax.swing.JButton btnLogin;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnConfigurar;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JLabel lblEsqueciSenha;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JPasswordField txtSenha;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JLabel lblEstabelecimento;
+    private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblMaquina;
+    private javax.swing.JLabel lblMensagem;
+    private javax.swing.JLabel lblSenha;
+    private javax.swing.JTextField tfdCodigoEstab;
+    private javax.swing.JTextField tfdCodigoMaquina;
+    private javax.swing.JTextField tfdLogin;
+    private javax.swing.JPasswordField tfdSenha;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,8 +28,6 @@ public class EstabelecimentoDAO {
 
     public Estabelecimento select(Usuario usuario,String codigoEstab) throws SQLException {
         
-        System.out.println("conexao select estabelecimento");
-        
         String insertSql = "select e.idEstab,e.codEstab,e.numMaquinas,e.fkUsuario " +
                             "from kprEstabelecimento as e " +
                             "inner join kprUsuario as u on e.fkUsuario = ? and u.idUsuario = ? and e.codEstab = ?;";

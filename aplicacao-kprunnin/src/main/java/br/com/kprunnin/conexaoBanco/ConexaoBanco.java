@@ -37,7 +37,6 @@ public class ConexaoBanco {
     
     public boolean testaConexaoComBanco() throws SQLException, IOException {
 
-        System.out.println("Conexao teste conexao");
         boolean conectado = false;
         String conexao = "";
         
@@ -67,10 +66,10 @@ public class ConexaoBanco {
     }
 
     public boolean configuraConexao(String login, String senha, String codigoEstab, String codigoMaquina) {
-        System.out.println("conexao configuracao");
+
         boolean configurado = false;
 
-        System.out.println("Iniciando pela primeira vez");
+        System.out.println("Iniciando configuracao");
 
         BufferedWriter bw;
 
@@ -97,7 +96,6 @@ public class ConexaoBanco {
 
     public boolean conectarComBanco(Connection connection) throws SQLException {
 
-        System.out.println("conexao conecta banco");
         boolean conectado = false;
 
         Usuario usuarioLogin = new Usuario(this.login, this.senha);

@@ -5,6 +5,7 @@
  */
 package br.com.kprunnin.Gui;
 
+import br.com.kprunnin.DAO.DadoDAO;
 import br.com.kprunnin.classes.Alerta;
 import br.com.kprunnin.classes.GraficoLinha;
 import br.com.kprunnin.classes.GraficoPizza;
@@ -21,6 +22,12 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.time.DynamicTimeSeriesCollection;
 import org.jfree.data.time.Second;
 import br.com.kprunnin.classes.ThreadDsk;
+import br.com.kprunnin.conexaoBanco.ConexaoBanco;
+import br.com.kprunnin.conexaoBanco.ConnectionFactory;
+import br.com.kprunnin.modelo.Dado;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
@@ -38,10 +45,10 @@ public class KprunninGui extends javax.swing.JFrame {
 
     private final GraficoLinha graficoLinha;
     private final GraficoPizza graficoPizza;
-    
+
     private String index1 = "Memoria em uso";
     private String index2 = "memoria livre";
-    
+
     public static float[] dadosDsk = {10};
     public static float[] dadosMem = new float[1];
     public static float[] dadosCpu = new float[1];
@@ -55,8 +62,15 @@ public class KprunninGui extends javax.swing.JFrame {
     public static int contagemErrosMem;
     public static int contagemErrosDsk;
 
+    private boolean testado;
+    private Integer idMaquina;
+    private boolean conectado;
+
     public KprunninGui() {
         initComponents();
+
+        this.conectado = false;
+        this.testado = false;
 
         this.monitoramento = new Monitoramento();
 
@@ -70,16 +84,40 @@ public class KprunninGui extends javax.swing.JFrame {
         this.datasetDisco = new DynamicTimeSeriesCollection(1, 60, new Second());
 
         this.alerta = new Alerta();
+        
+        if (testado == false) {
 
-        getInfoEstaticas();
+            try (Connection connection = new ConnectionFactory().getConnection()) {
 
-        lblAlerta.setText("Numeros de alertas Registrados: ");
-        barraDsk.setMaximum(101);
-        barraDsk.setMinimum(0);
-        barraDsk.setValue(0);
-        setValoresIniciais();
+                ConexaoBanco cb = new ConexaoBanco();
+                
+                testado = cb.testaConexaoComBanco();
+                
+                if (testado == true) {
+                    conectado = cb.conectarComBanco(connection);
+                    this.idMaquina = cb.getIdMaquina();
+                    conectado = true;
+                }
+       
+            } catch (SQLException | IOException ex) {
+                System.out.println("Não possui configuração, por favor a realize para que funcione");
+            }
+        }
 
-        atualizar();
+        if (conectado == true) {
+
+            getInfoEstaticas();
+
+            lblAlerta.setText("Numeros de alertas Registrados: ");
+            barraDsk.setMaximum(101);
+            barraDsk.setMinimum(0);
+            barraDsk.setValue(0);
+            
+            setValoresIniciais();
+
+            atualizar();
+
+        }
     }
 
     private void atualizar() {
@@ -97,9 +135,21 @@ public class KprunninGui extends javax.swing.JFrame {
 
             alerta.lancarAlerta(monitoramento.getCPU()[0], monitoramento.getDisco()[0],
                     alerta.pegaPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso()));
-
+            
             lblAlerta.setText("Numeros de Alertas Registrados: " + alerta.getErrosRegistrados());
-
+            
+            try(Connection connection = new ConnectionFactory().getConnection()){
+                boolean insertRealizado = false;
+                
+                Dado dado = new Dado(monitoramento.getCPU()[0], monitoramento.getMemoriaEmUso(),
+                                     monitoramento.getDisco()[0], this.idMaquina);
+                DadoDAO dadoDao = new DadoDAO(connection);
+                insertRealizado = dadoDao.insert(dado);
+                System.out.println("Inser realizado: " + insertRealizado);
+                
+            } catch (SQLException ex) {
+                System.out.println("Erro no insert de dados");
+            }
             pnlGeral.updateUI();
 
         });
@@ -130,7 +180,6 @@ public class KprunninGui extends javax.swing.JFrame {
         graficoPizza.adicionaValor(this.index1, monitoramento.getMemoriaEmUso());
 
         graficoPizza.adicionaValor(this.index2, monitoramento.getMemoriaLivre());
-
 
     }
 
@@ -302,7 +351,7 @@ public class KprunninGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCPUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPUActionPerformed
-        getGrafico(criaGraficoCpu());        
+        getGrafico(criaGraficoCpu());
         barraDsk.setVisible(false);
         KprunninGui.lblDisco.setVisible(false);
     }//GEN-LAST:event_btnCPUActionPerformed
