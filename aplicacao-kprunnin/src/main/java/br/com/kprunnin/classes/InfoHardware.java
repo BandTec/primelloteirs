@@ -19,6 +19,9 @@ import oshi.util.FormatUtil;
  */
 public class InfoHardware {
 
+    String origem = this.getClass().getSimpleName();
+    Logger log = new Logger();
+    Toolbox tb = new Toolbox();
     private final SystemInfo si;
     private final CentralProcessor infoProcessador;
     private final FileSystem arquivosSistema;
@@ -57,5 +60,5 @@ public class InfoHardware {
     public String toString() {
         return "Classe utilizada para capturar informações básicas do Hardware da máquina";
     }
-    
+
 }

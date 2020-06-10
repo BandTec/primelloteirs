@@ -13,12 +13,16 @@ import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.FileSystem;
 import oshi.util.Util;
 import br.com.kprunnin.Gui.KprunninGui;
+
 /**
  *
  * @author olive
  */
 public class Monitoramento {
 
+    String origem = this.getClass().getSimpleName();
+    Logger log = new Logger();
+    Toolbox tb = new Toolbox();
     private final SystemInfo si;
     private final CentralProcessor infoProcessador;
     private final FileSystem arquivosSistema;
@@ -27,7 +31,6 @@ public class Monitoramento {
     private final HWDiskStore[] disk;
     long[] filas = new long[4];
     private Integer filaSetada = 0;
-    
 
     public Monitoramento() {
         this.si = new SystemInfo();
@@ -67,19 +70,7 @@ public class Monitoramento {
     }
 
     public float[] getDisco() {
-        /*
-        float filaResultado;
 
-        for (Integer numeroDaMedicao = 0; numeroDaMedicao < filas.length; numeroDaMedicao++) {
-            this.filas[numeroDaMedicao] = disk[0].getCurrentQueueLength();
-            filaResultado = (float) (filas[0] + filas[1] + filas[2] + filas[3]) / (float) 4.0;
-            this.filaSetada = (int) (filaResultado * 20);
-            //Util.sleep(500);
-        }
-        
-        float [] usoDisco = new float[1];
-        usoDisco[0] = (float) this.filaSetada;  
-        */
         return KprunninGui.dadosDsk;
     }
 

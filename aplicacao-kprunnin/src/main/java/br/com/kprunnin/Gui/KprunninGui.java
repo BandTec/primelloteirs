@@ -11,6 +11,7 @@ import br.com.kprunnin.classes.GraficoLinha;
 import br.com.kprunnin.classes.GraficoPizza;
 import br.com.kprunnin.classes.InfoHardware;
 import br.com.kprunnin.classes.InfoMaquina;
+import br.com.kprunnin.classes.Logger;
 import br.com.kprunnin.classes.Monitoramento;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -22,12 +23,14 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.time.DynamicTimeSeriesCollection;
 import org.jfree.data.time.Second;
 import br.com.kprunnin.classes.ThreadDsk;
+import br.com.kprunnin.classes.Toolbox;
 import br.com.kprunnin.conexaoBanco.ConexaoBanco;
 import br.com.kprunnin.conexaoBanco.ConnectionFactory;
 import br.com.kprunnin.modelo.Dado;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 /**
  *
@@ -35,11 +38,13 @@ import java.sql.SQLException;
  */
 public class KprunninGui extends javax.swing.JFrame {
 
+    Logger log = new Logger();
+    Toolbox tb = new Toolbox();
     private final Monitoramento monitoramento;
-
+    String origem = this.getClass().getSimpleName();
     private final InfoHardware infoHardware;
     private final InfoMaquina infoMaquina;
-
+    
     private final DynamicTimeSeriesCollection datasetCpu;
     private final DynamicTimeSeriesCollection datasetDisco;
 
@@ -65,13 +70,22 @@ public class KprunninGui extends javax.swing.JFrame {
     private boolean testado;
     private Integer idMaquina;
     private boolean conectado;
+    public static String detalheConexao;
 
-    public KprunninGui() {
+    public void setDetalheConexao(String detalheConexao) {
+        this.detalheConexao = detalheConexao;
+    }
+
+    public String getDetalheConexao() {
+        return detalheConexao;
+    }
+    
+    
+    public KprunninGui() throws IOException {
         initComponents();
-
+        log.inicio();
         this.conectado = false;
         this.testado = false;
-
         this.monitoramento = new Monitoramento();
 
         this.infoHardware = new InfoHardware();
@@ -84,21 +98,21 @@ public class KprunninGui extends javax.swing.JFrame {
         this.datasetDisco = new DynamicTimeSeriesCollection(1, 60, new Second());
 
         this.alerta = new Alerta();
-        
+
         if (testado == false) {
 
             try (Connection connection = new ConnectionFactory().getConnection()) {
 
                 ConexaoBanco cb = new ConexaoBanco();
-                
+
                 testado = cb.testaConexaoComBanco();
-                
+
                 if (testado == true) {
                     conectado = cb.conectarComBanco(connection);
                     this.idMaquina = cb.getIdMaquina();
                     conectado = true;
                 }
-       
+
             } catch (SQLException | IOException ex) {
                 System.out.println("Não possui configuração, por favor a realize para que funcione");
             }
@@ -112,7 +126,7 @@ public class KprunninGui extends javax.swing.JFrame {
             barraDsk.setMaximum(101);
             barraDsk.setMinimum(0);
             barraDsk.setValue(0);
-            
+
             setValoresIniciais();
 
             atualizar();
@@ -133,22 +147,36 @@ public class KprunninGui extends javax.swing.JFrame {
             graficoPizza.getDataset().setValue(this.index1, monitoramento.getMemoriaEmUso());
             graficoPizza.getDataset().setValue(this.index2, monitoramento.getMemoriaLivre());
 
-            alerta.lancarAlerta(monitoramento.getCPU()[0], monitoramento.getDisco()[0],
-                    alerta.pegaPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso()));
-            
+            try {
+                alerta.lancarAlerta(monitoramento.getCPU()[0], monitoramento.getDisco()[0],
+                        alerta.pegaPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso()));
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(KprunninGui.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             lblAlerta.setText("Numeros de Alertas Registrados: " + alerta.getErrosRegistrados());
-            
-            try(Connection connection = new ConnectionFactory().getConnection()){
+
+            try (Connection connection = new ConnectionFactory().getConnection()) {
                 boolean insertRealizado = false;
-                
+
                 Dado dado = new Dado(monitoramento.getCPU()[0], monitoramento.getMemoriaEmUso(),
-                                     monitoramento.getDisco()[0], this.idMaquina);
+                        monitoramento.getDisco()[0], this.idMaquina);
                 DadoDAO dadoDao = new DadoDAO(connection);
                 insertRealizado = dadoDao.insert(dado);
-                System.out.println("Inser realizado: " + insertRealizado);
-                
+                //debug : registrar inserts 
+                //log.gravarLinha(tb.data(), "INFO", origem, "SQL - Insert de cpu, memoria e disco realizado");
+                //System.out.println("Insert realizado: " + insertRealizado);
+
             } catch (SQLException ex) {
                 System.out.println("Erro no insert de dados");
+                try {
+                    log.gravarLinha(tb.data(), "ALRT", origem, "SQL : erro no insert de cpu, memoria e disco");
+                } catch (IOException ex1) {
+                    java.util.logging.Logger.getLogger(KprunninGui.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+                //} catch (IOException ex) {
+                //    java.util.logging.Logger.getLogger(KprunninGui.class.getName()).log(Level.SEVERE, null, ex);
+                //
             }
             pnlGeral.updateUI();
 
@@ -374,6 +402,8 @@ public class KprunninGui extends javax.swing.JFrame {
      */
     public static void main(String args[]) throws Exception {
         ThreadDsk ThDsk = new ThreadDsk();
+        Logger log = new Logger();
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -400,7 +430,11 @@ public class KprunninGui extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ThDsk.start();
-                new KprunninGui().setVisible(true);
+                try {
+                    new KprunninGui().setVisible(true);
+                } catch (IOException ex) {
+                    java.util.logging.Logger.getLogger(KprunninGui.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 KprunninGui.barraDsk.setVisible(false);
                 KprunninGui.lblDisco.setVisible(false);
 

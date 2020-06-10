@@ -1,14 +1,14 @@
-
 package br.com.kprunnin.classes;
 
 import java.io.File;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import br.com.kprunnin.Gui.KprunninGui;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import java.util.Date;
 
 public class Toolbox {
 
+    String origem = this.getClass().getSimpleName();
 
     public float HSBFloat(int cor) {
         float porcentagemInvertida = cor - 100;
@@ -16,60 +16,59 @@ public class Toolbox {
         float corHsbFloat = porcentagemInvertidaPositiva / 333;
         return corHsbFloat;
     }
-
-    void PlayErro() {
-
-        try {
-            File arquivo = new File("./src/swingprojeto/erro.wav");
-            if (arquivo.exists()) {
-                AudioInputStream ai = AudioSystem.getAudioInputStream(arquivo);
-                Clip clipErro = AudioSystem.getClip();
-                clipErro.open(ai);
-                clipErro.start();
-            } else {
-                System.out.println("Som de erro não encontrado");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+/*
+    public static String add(int i) {
+        String resultado;
+        if (i < 10) {
+            resultado = "0" + i;
+        } else {
+            resultado = "" + i;
         }
+        return resultado;
     }
 
-    public void SvcAlertaSonoro() throws InterruptedException {
-        if (KprunninGui.dadosCpu[0] > 90) {
-            KprunninGui.contagemErrosCpu++;
-        } else {
-            KprunninGui.contagemErrosCpu = 0;
-        }
-        if (KprunninGui.dadosMem[0] > 90) {
-            KprunninGui.contagemErrosMem++;
-        } else {
-            KprunninGui.contagemErrosMem = 0;
-        }
-        if (KprunninGui.dadosDsk[0] > 90) {
-            KprunninGui.contagemErrosDsk++;
-        } else {
-            KprunninGui.contagemErrosDsk = 0;
-        }
+    public String dia() {
+        Date d = new Date();
+        return add(d.getDate());
+    }
 
-        if (KprunninGui.contagemErrosCpu > 10) {
-            PlayErro();
-            KprunninGui.contagemErrosCpu = 50;
-        } else {
-            KprunninGui.contagemErrosCpu = 0;
-        }
-        if (KprunninGui.contagemErrosMem > 20) {
-            PlayErro();
-            KprunninGui.contagemErrosMem = 10;
-        } else {
-            KprunninGui.contagemErrosMem = 0;
-        }
-        if (KprunninGui.contagemErrosDsk > 20) {
-            PlayErro();
-            KprunninGui.contagemErrosDsk = 10;
-        } else {
-            KprunninGui.contagemErrosDsk = 0;
-        }
+    public String mes() {
+        Date d = new Date();
+        return add((d.getMonth() + 1));
+    }
 
+    public String ano() {
+        Date d = new Date();
+        return add((d.getYear() + 1900));
+    }
+
+    public String hora() {
+        Date d = new Date();
+        return add(d.getHours());
+
+    }
+
+    public String minuto() {
+        Date d = new Date();
+        return add(d.getMinutes());
+
+    }
+
+    public String segundo() {
+        Date d = new Date();
+        System.out.println(add(d.getMinutes()));
+        return add(d.getMinutes());
+    }
+*/
+    public String data() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
+
+    public String horas() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
     }
 }

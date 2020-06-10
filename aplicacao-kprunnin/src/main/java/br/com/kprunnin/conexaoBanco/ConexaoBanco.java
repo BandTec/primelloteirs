@@ -8,6 +8,7 @@ package br.com.kprunnin.conexaoBanco;
 import br.com.kprunnin.DAO.EstabelecimentoDAO;
 import br.com.kprunnin.DAO.MaquinaDAO;
 import br.com.kprunnin.DAO.UsuarioDAO;
+import br.com.kprunnin.classes.Logger;
 import br.com.kprunnin.modelo.Estabelecimento;
 import br.com.kprunnin.modelo.Maquina;
 import br.com.kprunnin.modelo.Usuario;
@@ -22,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
+import br.com.kprunnin.classes.Toolbox;
 
 /**
  *
@@ -29,48 +31,52 @@ import java.sql.SQLException;
  */
 public class ConexaoBanco {
 
+    String origem = this.getClass().getSimpleName();
+    Logger log = new Logger();
+    Toolbox tb = new Toolbox();
     private String login = "vazia";
     private String senha = "vazia";
     private String codigoEstab = "vazia";
     private String codigoMaquina = "vazia";
     private Integer idMaquina;
-    
+
     public boolean testaConexaoComBanco() throws SQLException, IOException {
 
         boolean conectado = false;
         String conexao = "";
-        
+
         try (Connection connection = new ConnectionFactory().getConnection()) {
 
             try {
-               
+
                 BufferedReader br = new BufferedReader(new FileReader("autenticacao.txt"));
                 conexao = br.readLine();
                 br.close();
-                
-                String [] stringConexao = conexao.split(";");
-                
+
+                String[] stringConexao = conexao.split(";");
+
                 this.login = stringConexao[0];
                 this.senha = stringConexao[1];
                 this.codigoEstab = stringConexao[2];
                 this.codigoMaquina = stringConexao[3];
-                
                 conectado = true;
+                log.gravarLinha(tb.data(), "INFO", origem, "Teste de conexão com banco de dados feito");
 
             } catch (IOException e) {
+                log.gravarLinha(tb.data(), "ERRO", origem, "SQLException : Arquivo de configuração incompleto ou inexistente");
                 throw new SQLException("Ainda não configurado");
+
             } finally {
                 return conectado;
             }
         }
     }
 
-    public boolean configuraConexao(String login, String senha, String codigoEstab, String codigoMaquina) {
+    public boolean configuraConexao(String login, String senha, String codigoEstab, String codigoMaquina) throws IOException {
 
         boolean configurado = false;
 
-        System.out.println("Iniciando configuracao");
-
+        log.gravarLinha(tb.data(), "INFO", origem, "Iniciando configuracao da aplicação");
         BufferedWriter bw;
 
         try {
@@ -78,7 +84,7 @@ public class ConexaoBanco {
             bw = new BufferedWriter(new FileWriter("autenticacao.txt"));
             bw.write(login + ";" + senha + ";" + codigoEstab + ";" + codigoMaquina);
 
-            System.out.println("Registro efetuado");
+            log.gravarLinha(tb.data(), "INFO", origem, "Registro efetuado");
 
             this.login = login;
             this.senha = senha;
@@ -94,7 +100,7 @@ public class ConexaoBanco {
         return configurado;
     }
 
-    public boolean conectarComBanco(Connection connection) throws SQLException {
+    public boolean conectarComBanco(Connection connection) throws SQLException, IOException {
 
         boolean conectado = false;
 
@@ -108,13 +114,17 @@ public class ConexaoBanco {
 
         MaquinaDAO maquinaDao = new MaquinaDAO(connection);
         Maquina maquina = maquinaDao.select(estabelecimento, this.codigoMaquina);
+        String mensagem = String.format("Usuario: %s, Estabelecimento: %s, Maquina: %d ",
+                usuario.getNome(), estabelecimento.getCodEstab(), maquina.getIdMaquina());
 
-        System.out.println(String.format("Usuario: %s, Estabelecimento: %s, Maquina: %d ",
-                usuario.getNome(), estabelecimento.getCodEstab(), maquina.getIdMaquina()));
-        
+        log.gravarLinha(tb.data(), "INFO", origem, mensagem);
         this.idMaquina = maquina.getIdMaquina();
-
         conectado = true;
+
+        log.gravarLinha(tb.data(), "INFO", origem, "Banco de dados conectado. Informações da conexão :");
+        for (int cc = 0; cc < ConnectionFactory.getDetalheConexao().length; cc++) {
+            log.gravarLinha(ConnectionFactory.getDetalheConexao()[cc]);
+        }
 
         return conectado;
     }
@@ -122,5 +132,5 @@ public class ConexaoBanco {
     public Integer getIdMaquina() {
         return idMaquina;
     }
-    
+
 }

@@ -14,17 +14,20 @@ import oshi.software.os.OperatingSystem;
  * @author olive
  */
 public class InfoMaquina {
-    
+
+    String origem = this.getClass().getSimpleName();
+    Logger log = new Logger();
+    Toolbox tb = new Toolbox();
     private final SystemInfo si;
     private final OperatingSystem sistemaOperacional;
     private final ComputerSystem infoComputador;
-    
-    public InfoMaquina(){
+
+    public InfoMaquina() {
         this.si = new SystemInfo();
         this.sistemaOperacional = si.getOperatingSystem();
         this.infoComputador = si.getHardware().getComputerSystem();
     }
-    
+
     public String getSistemaOperacional() {
         String sistemaOperacional = String.valueOf(this.sistemaOperacional);
         return sistemaOperacional;

@@ -20,12 +20,15 @@ import org.jfree.data.time.Second;
  */
 public class GraficoLinha {
 
+    String origem = this.getClass().getSimpleName();
+    Logger log = new Logger();
+    Toolbox tb = new Toolbox();
     private final DynamicTimeSeriesCollection dataset;
     private Date horaMinuto;
     private ChartPanel chartPanel;
-    
+
     public GraficoLinha(float[] valor) {
-        
+
         this.dataset = new DynamicTimeSeriesCollection(1, 60, new Second());
         this.horaMinuto = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
     }
@@ -34,22 +37,22 @@ public class GraficoLinha {
         this.dataset.setTimeBase(new Second(this.horaMinuto));
         this.dataset.addSeries(valor, 0, titulo);
     }
-    
+
     public void atualizaDados(float[] valor) {
-        
+
         this.dataset.appendData(valor);
         this.dataset.advanceTime();
-        
+
     }
-    
+
     public DynamicTimeSeriesCollection getDataset() {
         return this.dataset;
     }
-    
-    public ChartPanel getChartPanel(){
+
+    public ChartPanel getChartPanel() {
         return this.chartPanel;
     }
-    
+
     public ChartPanel criaGraficoBarra(String titulo, String eixoY, String eixoX) {
 
         JFreeChart grafico = ChartFactory.createTimeSeriesChart(titulo, eixoX, eixoY, this.dataset, true, true, false);

@@ -5,16 +5,24 @@
  */
 package br.com.kprunnin.Gui;
 
+import br.com.kprunnin.classes.Logger;
+import br.com.kprunnin.classes.Toolbox;
 import br.com.kprunnin.conexaoBanco.ConexaoBanco;
 import br.com.kprunnin.conexaoBanco.ConnectionFactory;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 /**
  *
  * @author Ramon
  */
 public class Login extends javax.swing.JFrame {
+
+    String origem = this.getClass().getSimpleName();
+    Logger log = new Logger();
+    Toolbox tb = new Toolbox();
 
     /**
      * Creates new form Init
@@ -145,36 +153,48 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfigurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigurarActionPerformed
-        
+
         Integer lengthLogin = tfdLogin.getText().length();
         Integer lengthSenha = tfdSenha.getPassword().length;
         Integer lengthCodigoEstab = tfdCodigoEstab.getText().length();
         Integer lengthCodigoMaquina = tfdCodigoMaquina.getText().length();
-        
+
         boolean configurado = false;
-        
-        if(lengthLogin <= 5 && lengthSenha <= 5 && lengthCodigoEstab <= 10 && lengthCodigoMaquina <= 5){
+
+        if (lengthLogin <= 5 && lengthSenha <= 5 && lengthCodigoEstab <= 10 && lengthCodigoMaquina <= 5) {
+            try {
+                log.gravarLinha(tb.data(), "ERRO", origem, "Informações inválidas");
+            } catch (IOException ex) {
+            }
             System.out.println("Não deu certo");
             lblMensagem.setText("Todos os campos devem estar preenchidos");
 
         } else {
-            System.out.println("Deu certo");
-            
-            try(Connection connection = new ConnectionFactory().getConnection()){
-                
+            try {
+                log.gravarLinha(tb.data(), "INFO", origem, "Login preenchido com sucesso");
+            } catch (IOException ex) {
+            }
+
+            try (Connection connection = new ConnectionFactory().getConnection()) {
+
                 ConexaoBanco cb = new ConexaoBanco();
-                
+
                 configurado = cb.configuraConexao(tfdLogin.getText(), String.copyValueOf(tfdSenha.getPassword()),
                         tfdCodigoEstab.getText(), tfdCodigoMaquina.getText());
             } catch (SQLException ex) {
+                try {
+                    log.gravarLinha(tb.data(), "INFO", origem, "Campos inválidos, tente novamente");
+                } catch (IOException ex1) {
+                }
+
                 lblMensagem.setText("Campos inválidos, tente novamente");
+            } catch (IOException ex) {
             }
         }
-        
+
         System.out.println("Configurado: " + configurado);
     }//GEN-LAST:event_btnConfigurarActionPerformed
 
-        
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -207,7 +227,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfigurar;
     private javax.swing.JMenu jMenu1;
