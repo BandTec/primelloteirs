@@ -74,4 +74,9 @@ public class Monitoramento {
         return KprunninGui.dadosDsk;
     }
 
+    public float memoriaEmUso() {
+    	float memoria = memoriaGlobal.getTotal() - memoriaGlobal.getAvailable();
+		return memoria;
+	}
+
 }

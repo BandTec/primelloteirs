@@ -5,6 +5,7 @@
  */
 package br.com.kprunnin.Gui;
 
+import br.com.kprunnin.Bot.KPRunnin;
 import br.com.kprunnin.DAO.DadoDAO;
 import br.com.kprunnin.classes.Alerta;
 import br.com.kprunnin.classes.GraficoLinha;
@@ -22,6 +23,10 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.time.DynamicTimeSeriesCollection;
 import org.jfree.data.time.Second;
+import org.telegram.telegrambots.ApiContextInitializer;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
 import br.com.kprunnin.classes.ThreadDsk;
 import br.com.kprunnin.classes.Toolbox;
 import br.com.kprunnin.conexaoBanco.ConexaoBanco;
@@ -440,6 +445,15 @@ public class KprunninGui extends javax.swing.JFrame {
 
             }
         });
+        
+        ApiContextInitializer.init();
+        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
+        try {
+            telegramBotsApi.registerBot(new KPRunnin());
+
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
