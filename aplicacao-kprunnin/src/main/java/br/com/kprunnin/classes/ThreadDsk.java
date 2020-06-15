@@ -20,15 +20,16 @@ public class ThreadDsk extends Thread {
     File[] disco = File.listRoots();
     HWDiskStore[] disk = hal.getDiskStores();
     int tamanho = (int) (disk[0].getSize() / 1073741824);
-
+    
+    
     public void run() {
         HWDiskStore[] disk = hal.getDiskStores();
         int numeroDaMedicao = 0;
         float filaResultado;
-        Double espacoLivre = (double) disco[0].getFreeSpace() / 1073741824;
+        KprunninGui.espacoHD = (double) disco[0].getFreeSpace() / 1073741824;
         Double espacoTotal = (double) disco[0].getTotalSpace() / 1073741824;
         KprunninGui.lblArmazenamento.setText("Armazenamento Total: " + (disk[0].getSize() / 1073741824) + " GB");
-        int espacoUsado = (int) Math.round(((espacoTotal - espacoLivre) / espacoTotal) * 100);
+        int espacoUsado = (int) Math.round(((espacoTotal - KprunninGui.espacoHD) / espacoTotal) * 100);
         KprunninGui.barraDsk.setValue(espacoUsado);
         KprunninGui.barraDsk.setForeground(Color.getHSBColor(tb.HSBFloat(KprunninGui.barraDsk.getValue()), 1.0f, 1.0f));
         if (KprunninGui.timeTick < 5) {

@@ -55,7 +55,7 @@ public class ConnectionFactory {
         detalheConexao[0] = server;
         detalheConexao[1] = database;
         detalheConexao[2] = user;
-        detalheConexao[3] = pass;
+        detalheConexao[3] = "password=***;";
         detalheConexao[4] = encrypt;
         detalheConexao[5] = trust;
         detalheConexao[6] = timeout;

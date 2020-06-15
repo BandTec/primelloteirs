@@ -1,0 +1,112 @@
+
+ =========================================== 
+        Início da aplicação - 14-06-2020 20:56:45 
+ =========================================== 
+Microsoft Windows 7 SP1 build 7601
+System manufacturer
+System Product Name
+System Serial Number
+AMD Phenom(tm) II X4 820 Processor
+ 
+7,7 GiB de RAM
+238GB de armazenamento
+ =========================================== 
+[20:56:48] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[20:56:48] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[20:56:48] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=#Gfgrupo6b;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+[20:59:12] [ALRT] [Alerta] : Uso de memória maior que 90% por mais de 10 segundos.
+ =========================================== 
+        Início da aplicação - 14-06-2020 21:08:45 
+ =========================================== 
+Microsoft Windows 7 SP1 build 7601
+System manufacturer
+System Product Name
+System Serial Number
+AMD Phenom(tm) II X4 820 Processor
+ 
+7,7 GiB de RAM
+238GB de armazenamento
+ =========================================== 
+[21:08:48] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[21:08:48] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[21:08:48] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=#Gfgrupo6b;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 14-06-2020 21:21:30 
+ =========================================== 
+Microsoft Windows 7 SP1 build 7601
+System manufacturer
+System Product Name
+System Serial Number
+AMD Phenom(tm) II X4 820 Processor
+ 
+7,7 GiB de RAM
+238GB de armazenamento
+ =========================================== 
+[21:21:32] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[21:21:33] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[21:21:33] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=#Gfgrupo6b;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 14-06-2020 21:23:25 
+ =========================================== 
+Microsoft Windows 7 SP1 build 7601
+System manufacturer
+System Product Name
+System Serial Number
+AMD Phenom(tm) II X4 820 Processor
+ 
+7,7 GiB de RAM
+238GB de armazenamento
+ =========================================== 
+[21:23:28] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[21:23:28] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[21:23:28] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=#Gfgrupo6b;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 14-06-2020 22:57:49 
+ =========================================== 
+Microsoft Windows 7 SP1 build 7601
+System manufacturer
+System Product Name
+System Serial Number
+AMD Phenom(tm) II X4 820 Processor
+ 
+7,7 GiB de RAM
+238GB de armazenamento
+ =========================================== 
+[22:57:52] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[22:57:52] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[22:57:52] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=#Gfgrupo6b;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;

@@ -5,8 +5,7 @@
  */
 package br.com.kprunnin.Gui;
 
-import br.com.kprunnin.Bot.KPRunnin;
-import br.com.kprunnin.DAO.DadoDAO;
+import br.com.kprunnin.classes.TelegramBot;
 import br.com.kprunnin.classes.Alerta;
 import br.com.kprunnin.classes.GraficoLinha;
 import br.com.kprunnin.classes.GraficoPizza;
@@ -14,6 +13,7 @@ import br.com.kprunnin.classes.InfoHardware;
 import br.com.kprunnin.classes.InfoMaquina;
 import br.com.kprunnin.classes.Logger;
 import br.com.kprunnin.classes.Monitoramento;
+import br.com.kprunnin.DAO.DadoDAO;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -60,6 +60,7 @@ public class KprunninGui extends javax.swing.JFrame {
     private String index2 = "memoria livre";
 
     public static float[] dadosDsk = {10};
+    public static Double espacoHD;
     public static float[] dadosMem = new float[1];
     public static float[] dadosCpu = new float[1];
     public static int usoDsk = 0;
@@ -449,7 +450,7 @@ public class KprunninGui extends javax.swing.JFrame {
         ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
         try {
-            telegramBotsApi.registerBot(new KPRunnin());
+            telegramBotsApi.registerBot(new TelegramBot());
 
         } catch (TelegramApiException e) {
             e.printStackTrace();

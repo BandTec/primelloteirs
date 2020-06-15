@@ -52,6 +52,13 @@ public class Monitoramento {
     public float getMemoriaEmUso() {
         return this.memoriaGlobal.getTotal() - this.memoriaGlobal.getAvailable();
     }
+        public int getPorcentagemMem() {
+        long total = si.getHardware().getMemory().getTotal();
+        long disp = si.getHardware().getMemory().getAvailable();
+        long emUso = total - disp;
+        int percUso = (int) ((double) emUso / (double) total * 100);
+        return percUso;
+    }
 
     public float[] getCPU() {
 
