@@ -16,7 +16,6 @@ br\com\kprunnin\modelo\Maquina.class
 br\com\kprunnin\classes\InfoHardware.class
 br\com\kprunnin\DAO\UsuarioDAO.class
 br\com\kprunnin\classes\InfoMaquina.class
-.netbeans_automatic_build
 br\com\kprunnin\classes\ThreadDsk.class
 br\com\kprunnin\Gui\Login$2.class
 br\com\kprunnin\classes\Monitoramento.class

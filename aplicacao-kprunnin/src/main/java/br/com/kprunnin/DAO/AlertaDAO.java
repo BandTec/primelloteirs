@@ -32,8 +32,7 @@ public class AlertaDAO {
         try (PreparedStatement ps = connection.prepareStatement(insertSql)) {
 
             ps.setString(1, alerta.getAlerta());
-            ps.setInt(4, alerta.getFkMaquinaAlerta());
-            
+            ps.setInt(2, alerta.getFkMaquinaAlerta());
             ps.execute();
             insertRealizado = true;
         }
