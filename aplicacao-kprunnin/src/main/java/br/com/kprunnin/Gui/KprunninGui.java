@@ -198,6 +198,7 @@ public class KprunninGui extends javax.swing.JFrame {
         lblSistemaOperacional.setText("Sistema Operacional: " + infoMaquina.getSistemaOperacional());
         lblMemoria.setText("Memoria total: " + infoHardware.getMemoria());
         lblProcessador.setText("Informações do Processador: " + infoHardware.getProcessador());
+        lblArmazenamento.setText(String.format("Armazenamento total: %.1f GB", espacoHD));
 
     }
 

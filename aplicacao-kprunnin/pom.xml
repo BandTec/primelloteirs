@@ -89,7 +89,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>br.com.kprunnin.Gui.KprunninGui</mainClass>
+                            <mainClass>br.com.kprunnin.Gui.Login</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

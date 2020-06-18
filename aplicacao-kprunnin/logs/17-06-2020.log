@@ -1,0 +1,291 @@
+
+ =========================================== 
+        Início da aplicação - 17-06-2020 19:44:13 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[19:44:15] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[19:44:16] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[19:44:16] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 17-06-2020 19:52:46 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[19:52:48] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[19:52:49] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[19:52:49] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 17-06-2020 19:54:16 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[19:54:18] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[19:54:18] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[19:54:18] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 17-06-2020 19:55:04 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[19:55:06] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[19:55:07] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[19:55:07] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 17-06-2020 20:06:32 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[20:06:35] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[20:06:35] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[20:06:35] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 17-06-2020 20:36:51 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[20:36:53] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[20:36:53] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[20:36:53] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 17-06-2020 20:37:57 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[20:38:00] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[20:38:00] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[20:38:00] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 17-06-2020 20:38:23 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[20:38:41] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[20:38:46] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[20:38:46] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 17-06-2020 20:40:08 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[20:40:26] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[20:40:30] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[20:40:30] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 17-06-2020 21:01:38 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[21:01:41] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[21:01:41] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[21:01:41] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+ =========================================== 
+        Início da aplicação - 17-06-2020 21:09:03 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[21:09:06] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[21:09:06] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[21:09:06] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+[21:34:34] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+ =========================================== 
+        Início da aplicação - 17-06-2020 21:34:36 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[21:34:37] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[21:34:38] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[21:34:38] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;
+[21:35:53] [ERRO] [ConexaoBanco] : SQLException : Arquivo de configuração incompleto ou inexistente.
+[21:35:55] [ERRO] [Login] : Informações inválidas.
+[21:38:48] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+ =========================================== 
+        Início da aplicação - 17-06-2020 21:38:49 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+System manufacturer
+System Product Name
+System Serial Number
+AMD FX(tm)-6300 Six-Core Processor             
+ 
+7,7 GiB de RAM
+0GB de armazenamento
+ =========================================== 
+[21:38:51] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[21:38:51] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[21:38:51] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;

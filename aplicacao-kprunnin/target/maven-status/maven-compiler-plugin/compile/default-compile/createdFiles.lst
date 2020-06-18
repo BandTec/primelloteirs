@@ -1,4 +1,5 @@
 br\com\kprunnin\classes\Alerta.class
+br\com\kprunnin\classes\Logger.class
 br\com\kprunnin\conexaoBanco\ConnectionFactory.class
 br\com\kprunnin\Gui\KprunninGui.class
 br\com\kprunnin\Gui\KprunninGui$4.class
@@ -10,7 +11,6 @@ br\com\kprunnin\modelo\Usuario.class
 br\com\kprunnin\classes\GraficoPizza.class
 br\com\kprunnin\DAO\DadoDAO.class
 br\com\kprunnin\Gui\KprunninGui$2.class
-br\com\kprunnin\Bot\KPRunnin.class
 br\com\kprunnin\conexaoBanco\ConexaoBanco.class
 br\com\kprunnin\modelo\Maquina.class
 br\com\kprunnin\classes\InfoHardware.class
@@ -19,7 +19,7 @@ br\com\kprunnin\classes\InfoMaquina.class
 br\com\kprunnin\classes\ThreadDsk.class
 br\com\kprunnin\Gui\Login$2.class
 br\com\kprunnin\classes\Monitoramento.class
-br\com\kprunnin\Bot\PrincipalBot.class
+br\com\kprunnin\classes\TelegramBot.class
 br\com\kprunnin\modelo\Estabelecimento.class
 br\com\kprunnin\Gui\Login.class
 br\com\kprunnin\Gui\KprunninGui$3.class
