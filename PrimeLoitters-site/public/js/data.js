@@ -20,14 +20,14 @@ const interval = setInterval(() => {
 
 
     // Exibe na tela usando a div#data-hora
-    document.getElementById('data-hora').innerHTML = dataHora;
-    document.getElementById('data-hora1').innerHTML = dataHora1;
-    document.getElementById('data-hora2').innerHTML = dataHora2;
-    document.getElementById('data-hora3').innerHTML = dataHora3;
+    // document.getElementById('data-hora').innerHTML = dataHora;
+    // document.getElementById('data-hora1').innerHTML = dataHora1;
+    // document.getElementById('data-hora2').innerHTML = dataHora2;
+    // document.getElementById('data-hora3').innerHTML = dataHora3;
 
 
-    document.getElementById('data-hora3').innerHTML = dataHora4;
-    document.getElementById('data-hora3').innerHTML = dataHora5;
-    document.getElementById('data-hora3').innerHTML = dataHora6;
+    // document.getElementById('data-hora3').innerHTML = dataHora4;
+    // document.getElementById('data-hora3').innerHTML = dataHora5;
+    // document.getElementById('data-hora3').innerHTML = dataHora6;
 
 }, 1000);

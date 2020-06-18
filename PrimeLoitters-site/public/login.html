@@ -50,14 +50,16 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="" method="post">
+                            <form id="form_login" method="post" onsubmit="return entrar()">
                                 <div class="form-group">
                                     <label></label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="E-mail">
+                                    <input class="au-input au-input--full" type="text" name="login"
+                                        placeholder="E-mail">
                                 </div>
                                 <div class="form-group">
                                     <label></label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Senha">
+                                    <input class="au-input au-input--full" type="password" name="senha"
+                                        placeholder="Senha">
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
@@ -67,8 +69,9 @@
                                         <a href="./forget-pass.html">Esqueci a senha</a>
                                     </label>
                                 </div>
-                                <!-- Gambiarra pelo Pedro: Coloquei um link no botão pra direcionar pra dash enquanto não tem validação -->
-                                <center><a href="./estabelecimentos.html"><button class="au-btn au-btn--block au-btn--green m-b-20"  type="submit">Entrar</button></a></center>
+
+                                <center><button class="au-btn au-btn--block au-btn--green m-b-20" id="btn_entrar"
+                                        type="submit">Entrar</button></center>
 
                             </form>
                             <div class="register-link">
@@ -76,6 +79,7 @@
                                     Não tem conta ?
                                     <a href="./register.html">Cadastre-se</a>
                                 </p>
+
                             </div>
                         </div>
                     </div>
@@ -113,3 +117,38 @@
 
 </html>
 <!-- end document-->
+
+<script>
+
+    function entrar() {
+        var formulario = new URLSearchParams(new FormData(form_login));
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            body: formulario
+        }).then(resposta => {
+
+            if (resposta.ok) {
+
+                resposta.json().then(json => {
+
+                    sessionStorage.login_usuario_meuapp = json.login;
+                    sessionStorage.nome_usuario_meuapp = json.nome;
+                    sessionStorage.id_usuario_meuapp = json.idUsuario;
+
+                    window.location.href = 'estabelecimentos.html';
+                });
+
+            } else {
+
+                console.log('Erro de login!');
+
+                response.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+        });
+
+        return false;
+    }
+
+</script>

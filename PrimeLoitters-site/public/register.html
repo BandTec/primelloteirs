@@ -48,28 +48,32 @@
                             <a href="#" id="a2">PrimeLoitters</a>
                         </div>
                         <div class="login-form">
-                            <form action="" method="post">
+                            <form id="form_cadastro" method="post" onsubmit="return cadastrar()">
                                 <div class="form-group">
                                     <label></label>
-                                    <input class="au-input au-input--full" type="text" name="Username" placeholder="Nome">
+                                    <input class="au-input au-input--full" type="text" name="name"
+                                        placeholder="Nome">
                                 </div>
                                 <div class="form-group">
                                     <label></label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="E-mail">
+                                    <input class="au-input au-input--full" type="email" name="email"
+                                        placeholder="E-mail">
                                 </div>
                                 <div class="form-group">
                                     <label></label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Senha">
+                                    <input class="au-input au-input--full" type="password" name="password"
+                                        placeholder="Senha">
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
                                         <input type="checkbox" name="aggree">Eu aceito os termos de privacidade
                                     </label>
                                 </div>
-                                <center><a href="./login.html"><button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Cadastrar</button></a></center>
-
+                                <center><a href="./login.html"><button class="au-btn au-btn--block au-btn--green m-b-20"
+                                            type="submit">Cadastrar</button></a></center>
+                            </form>
                         </div>
-                        </form>
+
                         <div class="register-link">
                             <p>
                                 Possui conta ?
@@ -112,3 +116,30 @@
 
 </html>
 <!-- end document-->
+<script>
+
+    function cadastrar() {
+
+        var formulario = new URLSearchParams(new FormData(form_cadastro));
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            body: formulario
+        }).then(function (response) {
+
+            if (response.ok) {
+
+                window.location.href = 'login.html';
+
+            } else {
+
+                console.log('Erro de cadastro!');
+                response.text().then(function (resposta) {
+                    
+                });
+            }
+        });
+
+        return false;
+    }
+
+</script>

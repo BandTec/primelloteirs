@@ -44,55 +44,67 @@
                     </div>
 
                     <div class="login-form">
-
-                        <form action="" method="post">
+                        
+                        <form id="form_cadastro" method="post" onsubmit="return cadastrar()">
                             <center>
+                                <div class="form-group">
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        Codigo da máquina
+                                    </label>
+                                    <input class="au-input au-input--full" type="text" name="codigoMaquina" placeholder="A58REF689C">
+                                </div>
                                 <div class="form-group">
                                     <label>&nbsp;&nbsp;&nbsp;&nbsp;
                                         Marca da máquina
                                     </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="Mercadinho do seu Zé">
+                                    <input class="au-input au-input--full" type="text" name="marca" placeholder="Dell">
                                 </div>
 
                                 <div class="form-group">
                                     <label>&nbsp;&nbsp;&nbsp;&nbsp;
                                         Modelo da máquina
                                     </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="(11) 91234-5678">
+                                    <input class="au-input au-input--full" type="text" name="modelo" placeholder="3470-A15M 9º Geração">
                                 </div>
                                 <div class="form-group">
                                     <label>&nbsp;&nbsp;&nbsp;&nbsp;
                                         Número de série da máquina
                                     </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="(11) 91234-5678">
+                                    <input class="au-input au-input--full" type="text" name="numeroSerie"
+                                        placeholder="DLX9GL10518068417925">
                                 </div>
                                 <div class="form-group">
                                     <label>&nbsp;&nbsp;&nbsp;&nbsp;
                                         Sistema operacional da máquina
                                     </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="Haddoc Lobo">
+                                    <input class="au-input au-input--full" type="text" name="sistemaOperacional"
+                                        placeholder="Windows 10">
                                 </div>
                                 <div class="form-group">
                                     <label>&nbsp;&nbsp;&nbsp;&nbsp;
                                         Total de HD da máquina
                                     </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="548">
+                                    <input class="au-input au-input--full" type="text" name="espacoTotal"
+                                        placeholder="1TB">
                                 </div>
                                 <div class="form-group">
                                     <label>&nbsp;&nbsp;&nbsp;&nbsp;
                                         Memória total da máquina
                                     </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="Consolação">
+                                    <input class="au-input au-input--full" type="text" name="memoriaTotal"
+                                        placeholder="8GB RAM">
                                 </div>
                                 <div class="form-group">
                                     <label>&nbsp;&nbsp;&nbsp;&nbsp;
                                         Informações do Processador
                                     </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="SP">
+                                    <input class="au-input au-input--full" type="text" name="infoProcessador"
+                                        placeholder="i5-10400T">
                                 </div>
                             </center>
 
-                            <center><a href="./login.html"><button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Registrar máquina</button></a></center>
+                            <center><button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Registrar
+                                    máquina</button></center>
                         </form>
                     </div>
                 </div>
@@ -126,7 +138,40 @@
     <!-- Main JS-->
     <script src="js/main.js"></script>
 
+    <script type="text/javascript" src="funcoes.js"></script>
+
 </body>
 
 </html>
 <!-- end document-->
+
+<script>
+
+    let usuario;
+
+    verificar_autenticacao();
+
+    function cadastrar() {
+        var formulario = new URLSearchParams(new FormData(form_cadastro));
+        fetch(`/maquinas/cadastrar`, {
+            method: "POST",
+            body: formulario
+        }).then(function (response) {
+
+            if (response.ok) {
+
+                window.location.href = 'dash.html';
+
+            } else {
+
+                console.log('Erro de cadastro!');
+                response.text().then(function (resposta) {
+                });
+
+            }
+        });
+
+        return false;
+    }
+
+</script>

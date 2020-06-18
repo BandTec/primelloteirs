@@ -50,59 +50,26 @@
 
                     <div class="login-form">
 
-                        <form action="" method="post">
+                        <form id="form_cadastro" method="post" onsubmit="return cadastrar()">
                             <center>
                                 <div class="form-group">
                                     <label>&nbsp;&nbsp;&nbsp;&nbsp;
                                         Digite um nome para o seu estabelecimento
                                     </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="Mercadinho do seu Zé">
+                                    <input class="au-input au-input--full" type="text" name="name"
+                                        placeholder="Mercadinho do seu Zé">
                                 </div>
 
                                 <div class="form-group">
                                     <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    Telefone
+                                        Digite um codigo para o seu estabelecimento
                                     </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="(11) 91234-5678">
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    Celular
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="(11) 91234-5678">
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    Rua
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="Haddoc Lobo">
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    Número
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="548">
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    Bairro
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="Consolação">
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    Cidade
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="SP">
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    Estado
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="estabelecimento" placeholder="São Paulo">
+                                    <input class="au-input au-input--full" type="text" name="code"
+                                        placeholder="E1257BT7C2">
                                 </div>
                             </center>
-                            <center><a href="./login.html"><button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Registrar estabelecimento</button></a></center>
+                            <center><button class="au-btn au-btn--block au-btn--green m-b-20"
+                                        type="submit">Registrar estabelecimento</button></center>
                         </form>
                     </div>
                 </div>
@@ -136,7 +103,39 @@
     <!-- Main JS-->
     <script src="js/main.js"></script>
 
+    <script type="text/javascript" src="funcoes.js"></script>
 </body>
 
 </html>
 <!-- end document-->
+
+<script>
+
+    let usuario;
+
+    verificar_autenticacao();
+
+    function cadastrar() {
+        var formulario = new URLSearchParams(new FormData(form_cadastro));
+        fetch(`/estabelecimento/cadastrar`, {
+            method: "POST",
+            body: formulario
+        }).then(function (response) {
+
+            if (response.ok) {
+
+                window.location.href = 'estabelecimentos.html';
+
+            } else {
+
+                console.log('Erro de cadastro!');
+                response.text().then(function (resposta) {
+                });
+
+            }
+        });
+
+        return false;
+    }
+
+</script>

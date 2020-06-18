@@ -36,9 +36,11 @@
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
 
+    <script type="text/javascript" src="funcoes.js"></script>
+
 </head>
 
-<body class="animsition">
+<body class="animsition" onload="coletar()">
     <div class="page-wrapper">
         <div class="page-content--bge5">
             <div class="container">
@@ -50,14 +52,9 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="" method="post">
-                                <br><br>
 
-                                <center><a href="./index.html"><button class="au-btn au-btn--block au-btn--green m-b-20"  type="submit">Estabelecimento A</button></a></center>
-                                <center><a href="./index.html"><button class="au-btn au-btn--block au-btn--green m-b-20"  type="submit">Estabelecimento B</button></a></center>
-                                <center><a href="./index.html"><button class="au-btn au-btn--block au-btn--green m-b-20"  type="submit">Estabelecimento C</button></a></center>
-                                <center><a href="./index.html"><button class="au-btn au-btn--block au-btn--green m-b-20"  type="submit">Estabelecimento D</button></a></center>
-
+                            <br><br>
+                            <div id="estabelecimentos"></div>
                             </form>
                         </div>
                     </div>
@@ -95,3 +92,83 @@
 
 </html>
 <!-- end document-->
+
+<script>
+    let opcoes_estabs = [];
+
+    document.body.addEventListener("click", function (event) {
+
+        for (i = 0; i < opcoes_estabs.length; i++) {
+            idEstabelecimento = event.target.value;
+            if (idEstabelecimento == opcoes_estabs[i]) {
+                
+                fetch(`/estabelecimentos/recuperar/${getIdUsuario()}`, { cache: 'no-store' }).then(function (response) {
+                    if (response.ok) {
+                        response.json().then(function (resposta) {
+
+                            for (i = 0; i < resposta.length; i++) {
+
+                                var registro = resposta[i];
+
+                                if (idEstabelecimento == registro.idEstab) {
+
+                                    sessionStorage.nome_estabelecimento_meuapp = registro.nomeEstab;
+                                    sessionStorage.id_estabelecimento_meuapp = registro.idEstab;
+                                    sessionStorage.codigo_estabelecimento_meuapp = registro.codEstab;
+
+                                    window.location.href = 'dash.html';
+
+                                }
+
+                            }
+                        });
+
+                    } else {
+                        console.error('Nenhum dado encontrado ou erro na API');
+                    }
+                })
+                    .catch(function (error) {
+                        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                    });
+            }
+        }
+    });
+
+    let usuario;
+
+    let idEstabelecimento;
+
+    verificar_autenticacao();
+    // let idUsuario = getIdUsuario();
+
+    function coletar() {
+
+        fetch(`/estabelecimentos/recuperar/${getIdUsuario()}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta[0])}`);
+
+                    for (i = 0; i < resposta.length; i++) {
+                        var registro = resposta[i];
+                        opcoes_estabs.push(registro.idEstab);
+                        console.log(registro.codEstab);
+                        estabelecimentos.innerHTML += `<center><button id="botao${i}" value="${registro.idEstab}" class="au-btn au-btn--block au-btn--green m-b-20">
+                        ${registro.codEstab}</button></center>`;
+                    }
+                    
+                    estabelecimentos.innerHTML += `<center><a href="register-estab.html"><button class="au-btn au-btn--block au-btn--green m-b-20">
+                        Cadastrar novo Estabelecimento</button></a></center>`
+                });
+
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+
+</script>
