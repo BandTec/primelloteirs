@@ -5,8 +5,13 @@
  */
 package br.com.kprunnin.classes;
 
+import br.com.kprunnin.DAO.AlertaDAO;
+import br.com.kprunnin.conexaoBanco.ConnectionFactory;
+import br.com.kprunnin.modelo.AlertaBd;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -61,7 +66,7 @@ public class Alerta {
         return (qualQuero * 100) / total;
     }
 
-    public void lancarAlerta(float valorCpu, float valorDisco, float valorMemoria) throws IOException {
+    public void lancarAlerta(float valorCpu, float valorDisco, float valorMemoria, Integer idMaquina) throws IOException, SQLException {
         if (valorCpu > nivelAlertaCpu) {
             this.contagemErrosCpu++;
         } else {
@@ -82,28 +87,56 @@ public class Alerta {
 
         if (this.contagemErrosCpu > tempoAlertaCpu/3) {
             PlayErro();
+            String erroCpu = String.format("Uso de cpu maior que %d%% por mais de %d segundos",
+                    nivelAlertaCpu, tempoAlertaCpu);
             this.contagemErrosCpu = 0;
-            log.gravarLinha(tb.data(), "ALRT", origem, String.format("Uso de cpu maior que %d%% por mais de %d segundos",
-                    nivelAlertaCpu, tempoAlertaCpu));
+            log.gravarLinha(tb.data(), "ALRT", origem, erroCpu);
             this.errosRegistrados++;
+            
+            try(Connection connection = new ConnectionFactory().getConnection()){
+                
+                AlertaBd alerta = new AlertaBd(erroCpu, idMaquina);
+                
+                AlertaDAO alertaDao = new AlertaDAO(connection);
+                alertaDao.insert(alerta);
+            }
+            
             //Registrar erro
         }
 
         if (this.contagemErrosMemoria > tempoAlertaMemoria/3) {
             PlayErro();
+            String erroMemoria = String.format("Uso de memória maior que %d%% por mais de %d segundos",
+                    nivelAlertaMemoria, tempoAlertaMemoria);
             this.contagemErrosMemoria = 0;
-            log.gravarLinha(tb.data(), "ALRT", origem, String.format("Uso de memória maior que %d%% por mais de %d segundos",
-                    nivelAlertaMemoria, tempoAlertaMemoria));
+            log.gravarLinha(tb.data(), "ALRT", origem, erroMemoria);
 
             this.errosRegistrados++;
+            
+            try(Connection connection = new ConnectionFactory().getConnection()){
+                
+                AlertaBd alerta = new AlertaBd(erroMemoria, idMaquina);
+                
+                AlertaDAO alertaDao = new AlertaDAO(connection);
+                alertaDao.insert(alerta);
+            }
             //Registrar erro
         }
         if (this.contagemErrosDisco > tempoAlertaDisco/3) {
             PlayErro();
+            String erroDisco = String.format("Uso de disco maior que %d%% por mais de %d segundos",
+                    nivelAlertaDisco, tempoAlertaDisco);
             this.contagemErrosMemoria = 0;
-            log.gravarLinha(tb.data(), "ALRT", origem, String.format("Uso de disco maior que %d%% por mais de %d segundos",
-                    nivelAlertaDisco, tempoAlertaDisco));
+            log.gravarLinha(tb.data(), "ALRT", origem, erroDisco);
             this.errosRegistrados++;
+            
+            try(Connection connection = new ConnectionFactory().getConnection()){
+                
+                AlertaBd alerta = new AlertaBd(erroDisco, idMaquina);
+                
+                AlertaDAO alertaDao = new AlertaDAO(connection);
+                alertaDao.insert(alerta);
+            }
             //Registrar erro
         }
 

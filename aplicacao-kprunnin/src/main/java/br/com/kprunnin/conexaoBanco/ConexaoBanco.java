@@ -17,10 +17,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import br.com.kprunnin.classes.Toolbox;
@@ -114,6 +110,7 @@ public class ConexaoBanco {
 
         MaquinaDAO maquinaDao = new MaquinaDAO(connection);
         Maquina maquina = maquinaDao.select(estabelecimento, this.codigoMaquina);
+        System.out.println(maquina);
         String mensagem = String.format("Usuario: %s, Estabelecimento: %s, Maquina: %d ",
                 usuario.getNome(), estabelecimento.getCodEstab(), maquina.getIdMaquina());
 

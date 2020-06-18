@@ -106,7 +106,7 @@ public class KprunninGui extends javax.swing.JFrame {
         this.alerta = new Alerta();
 
         if (testado == false) {
-
+            
             try (Connection connection = new ConnectionFactory().getConnection()) {
 
                 ConexaoBanco cb = new ConexaoBanco();
@@ -121,6 +121,7 @@ public class KprunninGui extends javax.swing.JFrame {
 
             } catch (SQLException | IOException ex) {
                 System.out.println("Não possui configuração, por favor a realize para que funcione");
+                ex.printStackTrace();
             }
         }
 
@@ -155,8 +156,8 @@ public class KprunninGui extends javax.swing.JFrame {
 
             try {
                 alerta.lancarAlerta(monitoramento.getCPU()[0], monitoramento.getDisco()[0],
-                        alerta.pegaPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso()));
-            } catch (IOException ex) {
+                        alerta.pegaPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso()), this.idMaquina);
+            } catch (IOException | SQLException ex) {
                 java.util.logging.Logger.getLogger(KprunninGui.class.getName()).log(Level.SEVERE, null, ex);
             }
 

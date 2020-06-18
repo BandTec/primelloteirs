@@ -26,11 +26,14 @@ public class MaquinaDAO {
 
     public Maquina select(Estabelecimento estabelecimento, String codigoMaquina) throws SQLException {
 
-        String insertSql = "select m.IdMaquina, m.tipoMaquina,m.codigoMaquina, m.numeroSerie," +
-                            " m.memoria, m.valorCpu, m.disco, m.fkEstabelecimento \n" +
-                            "from kprMaquina as m inner join kprEstabelecimento as e " +
-                            "on m.fkEstabelecimento = ? and e.idEstab = ? and m.codigoMaquina = ?;";
-
+        String insertSql = "select kprMaquina.IdMaquina, kprMaquina.tipoMaquina,kprMaquina.codigoMaquina, kprMaquina.numeroSerie," +
+                            "kprMaquina.marcaMaquina, kprMaquina.modelo, kprMaquina.sistemaOperacional," +
+                            "kprMaquina.espacoTotalHd, kprMaquina.memoriaTotal, kprMaquina.infoProcessador, kprMaquina.fkEstabelecimento " +
+                            "from kprMaquina inner join kprEstabelecimento " +
+                            "on kprMaquina.fkEstabelecimento = ? and kprEstabelecimento.idEstab = ? and kprMaquina.codigoMaquina = ?;";
+        
+                            
+                            
         try (PreparedStatement ps = connection.prepareStatement(insertSql)) {
 
             ps.setInt(1, estabelecimento.getIdEstab());
@@ -47,7 +50,8 @@ public class MaquinaDAO {
                     
                     maquina = new 
                         Maquina(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4),
-                                rs.getInt(5), rs.getInt(6), rs.getInt(7),rs.getInt(8));
+                                rs.getString(5), rs.getString(6), rs.getString(7),
+                                rs.getString(8),rs.getString(9),rs.getString(10),rs.getInt(11));
                     
                 }
                 

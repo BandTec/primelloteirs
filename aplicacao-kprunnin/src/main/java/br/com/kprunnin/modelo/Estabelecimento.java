@@ -13,33 +13,34 @@ public class Estabelecimento {
     
     private Integer idEstab;
     private String codEstab;
-    private Integer numMaquinas;
     private Integer fkUsuario;
+    private String nomeEstab;
 
     public Estabelecimento(){}
-    public Estabelecimento(Integer idEstab, String codEstab, Integer numMaquinas, Integer fkUsuario) {
+
+    public Estabelecimento(Integer idEstab, String codEstab, String nomeEstab, Integer fkUsuario) {
         this.idEstab = idEstab;
         this.codEstab = codEstab;
-        this.numMaquinas = numMaquinas;
         this.fkUsuario = fkUsuario;
+        this.nomeEstab = nomeEstab;
     }
 
     public Integer getIdEstab() {
-        return idEstab;
+        return this.idEstab;
     }
 
     public String getCodEstab() {
-        return codEstab;
-    }
-
-    public Integer getNumMaquinas() {
-        return numMaquinas;
+        return this.codEstab;
     }
 
     public Integer getFkUsuario() {
-        return fkUsuario;
+        return this.fkUsuario;
     }
 
+    public String getNomeEstab() {
+        return this.nomeEstab;
+    }
+    
     @Override
     public String toString() {
         return String.format("Estabelecimento código: %s", this.codEstab);

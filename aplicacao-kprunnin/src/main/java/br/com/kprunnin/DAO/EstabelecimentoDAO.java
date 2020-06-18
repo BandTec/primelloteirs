@@ -28,7 +28,7 @@ public class EstabelecimentoDAO {
 
     public Estabelecimento select(Usuario usuario,String codigoEstab) throws SQLException {
         
-        String insertSql = "select e.idEstab,e.codEstab,e.numMaquinas,e.fkUsuario " +
+        String insertSql = "select e.idEstab,e.codEstab,e.nomeEstab,e.fkUsuario " +
                             "from kprEstabelecimento as e " +
                             "inner join kprUsuario as u on e.fkUsuario = ? and u.idUsuario = ? and e.codEstab = ?;";
      
@@ -47,7 +47,7 @@ public class EstabelecimentoDAO {
                 while(rs.next()){
                     
                     estabelecimento = new 
-                        Estabelecimento(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+                        Estabelecimento(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4));
             
                 }
                 
