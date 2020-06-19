@@ -8,10 +8,10 @@ router.get('/recuperar/:idEstabelecimento', function(req, res, next) {
 	
 	var idEstabelecimento = req.params.idEstabelecimento;
 
-	console.log(`Recuperando os alertas do estabelecimento com id ${idEstabelecimento}`);
+	console.log(`Recuperando os alertas do estabelecimento do id ${idEstabelecimento}`);
 	
-	const instrucaoSql = `select distinct a.idAlerta,a.alerta,a.dataAlerta,a.fkMaquinaAlerta from alerta as a 
-						  inner join kprMaquina as m on m.fkEstabelecimento = ${idEstabelecimento};`;
+	const instrucaoSql = `select distinct a.idAlerta,a.alerta,a.dataAlerta,a.fkMaquinaAlerta from alerta as a, 
+						  kprMaquina as m, kprEstabelecimento as e where a.fkEstabelecimento = ${idEstabelecimento};`;
 	sequelize.query(instrucaoSql, {
 		model: Alerta,
 		mapToModel: true

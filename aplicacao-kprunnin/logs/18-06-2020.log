@@ -262,3 +262,26 @@ trustServerCertificate=false;
 loginTimeout=30;
 [01:43:51] [ALRT] [Alerta] : Uso de memória maior que 90% por mais de 10 segundos.
 [01:43:54] [ALRT] [Alerta] : Uso de memória maior!!!!.
+[23:09:08] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+ =========================================== 
+        Início da aplicação - 18-06-2020 23:09:10 
+ =========================================== 
+Microsoft Windows 10 (Home) build 18363
+SAMSUNG ELECTRONICS CO., LTD.
+550XBE/350XBE
+09359QBMB00385
+Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz
+ 
+7,9 GiB de RAM
+931GB de armazenamento
+ =========================================== 
+[23:09:11] [INFO] [ConexaoBanco] : Teste de conexão com banco de dados feito.
+[23:09:12] [INFO] [ConexaoBanco] : Usuario: Administrador, Estabelecimento: 1234567890, Maquina: 1000 .
+[23:09:12] [INFO] [ConexaoBanco] : Banco de dados conectado. Informações da conexão :.
+jdbc:sqlserver://svrkprunnin.database.windows.net:1433;
+database=bdkprunnin;
+user=localprimeloitters@svrkprunnin;
+password=***;
+encrypt=true;
+trustServerCertificate=false;
+loginTimeout=30;

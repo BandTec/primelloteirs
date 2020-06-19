@@ -66,7 +66,7 @@ public class Alerta {
         return (qualQuero * 100) / total;
     }
 
-    public void lancarAlerta(float valorCpu, float valorDisco, float valorMemoria, Integer idMaquina) throws IOException, SQLException {
+    public void lancarAlerta(float valorCpu, float valorDisco, float valorMemoria, Integer idMaquina, Integer idEstabelecimento) throws IOException, SQLException {
         if (valorCpu > nivelAlertaCpu) {
             this.contagemErrosCpu++;
         } else {
@@ -95,7 +95,7 @@ public class Alerta {
             
             try(Connection connection = new ConnectionFactory().getConnection()){
                 
-                AlertaBd alerta = new AlertaBd(erroCpu, idMaquina);
+                AlertaBd alerta = new AlertaBd(erroCpu, idMaquina, idEstabelecimento);
                 
                 AlertaDAO alertaDao = new AlertaDAO(connection);
                 alertaDao.insert(alerta);
@@ -115,7 +115,7 @@ public class Alerta {
             
             try(Connection connection = new ConnectionFactory().getConnection()){
                 
-                AlertaBd alerta = new AlertaBd(erroMemoria, idMaquina);
+                AlertaBd alerta = new AlertaBd(erroMemoria, idMaquina, idEstabelecimento);
                 
                 AlertaDAO alertaDao = new AlertaDAO(connection);
                 alertaDao.insert(alerta);
@@ -132,7 +132,7 @@ public class Alerta {
             
             try(Connection connection = new ConnectionFactory().getConnection()){
                 
-                AlertaBd alerta = new AlertaBd(erroDisco, idMaquina);
+                AlertaBd alerta = new AlertaBd(erroDisco, idMaquina, idEstabelecimento);
                 
                 AlertaDAO alertaDao = new AlertaDAO(connection);
                 alertaDao.insert(alerta);

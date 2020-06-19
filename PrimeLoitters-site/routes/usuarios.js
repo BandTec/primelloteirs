@@ -60,7 +60,7 @@ router.post('/cadastrar', function(req, res, next) {
 		mapToModel: true
 	}).then(resultado => {
 		console.log(`Usuário criado: ${resultado}`)
-        //res.send(resultado);
+        res.send(resultado);
     }).catch(erro => {
 		console.error(erro);
 		res.status(500).send(erro.message);

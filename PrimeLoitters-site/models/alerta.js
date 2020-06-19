@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
 		fkMaquinaAlerta: {
 			type: DataTypes.INTEGER,
 			allowNull: false
+		},
+		fkEstabelecimento: {
+			type: DataTypes.INTEGER,
+			allowNull: false
 		}
 	}, 
 	{

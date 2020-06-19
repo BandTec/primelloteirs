@@ -13,10 +13,16 @@ public class AlertaBd {
     
     private String alerta;
     private Integer fkMaquinaAlerta; 
+    private Integer fkEstabelecimento;
 
-    public AlertaBd(String alerta, Integer fkMaquinaAlerta) {
+    public Integer getFkEstabelecimento() {
+        return fkEstabelecimento;
+    }
+    
+    public AlertaBd(String alerta, Integer fkMaquinaAlerta, Integer fkEstabelecimento) {
         this.alerta = alerta;
         this.fkMaquinaAlerta = fkMaquinaAlerta;
+        this.fkEstabelecimento = fkEstabelecimento;
     }
 
     public String getAlerta() {

@@ -153,7 +153,7 @@
 
     function cadastrar() {
         var formulario = new URLSearchParams(new FormData(form_cadastro));
-        fetch(`/maquinas/cadastrar`, {
+        fetch(`/maquinas/cadastrar/${getIdEstab()}`, {
             method: "POST",
             body: formulario
         }).then(function (response) {

@@ -4,21 +4,22 @@ var sequelize = require('../models').sequelize;
 var Estabelecimento = require('../models').Estabelecimento;
 
 /* Cadastrar estabelecimento */
-router.post('/cadastrar', function(req, res, next) {
+router.post('/cadastrar/:idUsuario', function(req, res, next) {
 	console.log('Recuperando usuário por login e senha');
 
+	var idUsuario = req.params.idUsuario;
 	var nome = req.body.name; // depois de .body, use o nome (name) do campo em seu formulário de login
 	var codigo = req.body.code; // depois de .body, use o nome (name) do campo em seu formulário de login	
 	
 	let instrucaoSql = `insert into kprEstabelecimento (codEstab, fkUsuario, nomeEstab) values 
-						('${codigo}', ${getIdUsuario}, '${nome}')`;
-	console.log(instrucaoSql);
+						('${codigo}', ${idUsuario}, '${nome}')`;
 
 	sequelize.query(instrucaoSql, {
         model: Estabelecimento,
         mapToModel: true
 	}).then(resultado => {
 		console.log(`Estabelecimento cadastrado`);
+		res.send(resultado);
 	}).catch(erro => {
 		console.error(erro);
 		res.status(500).send(erro.message);

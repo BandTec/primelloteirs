@@ -117,7 +117,7 @@
 
     function cadastrar() {
         var formulario = new URLSearchParams(new FormData(form_cadastro));
-        fetch(`/estabelecimento/cadastrar`, {
+        fetch(`/estabelecimentos/cadastrar/${getIdUsuario()}`, {
             method: "POST",
             body: formulario
         }).then(function (response) {

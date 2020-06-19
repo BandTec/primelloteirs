@@ -35,7 +35,8 @@ public class ConexaoBanco {
     private String codigoEstab = "vazia";
     private String codigoMaquina = "vazia";
     private Integer idMaquina;
-
+    private Integer idEstabelecimento;
+    
     public boolean testaConexaoComBanco() throws SQLException, IOException {
 
         boolean conectado = false;
@@ -116,6 +117,7 @@ public class ConexaoBanco {
 
         log.gravarLinha(tb.data(), "INFO", origem, mensagem);
         this.idMaquina = maquina.getIdMaquina();
+        this.idEstabelecimento = estabelecimento.getIdEstab();
         conectado = true;
 
         log.gravarLinha(tb.data(), "INFO", origem, "Banco de dados conectado. Informações da conexão :");
@@ -128,6 +130,10 @@ public class ConexaoBanco {
 
     public Integer getIdMaquina() {
         return idMaquina;
+    }
+
+    public Integer getIdEstabelecimento() {
+        return this.idEstabelecimento;
     }
 
 }

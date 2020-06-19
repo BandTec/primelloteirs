@@ -75,6 +75,7 @@ public class KprunninGui extends javax.swing.JFrame {
 
     private boolean testado;
     private Integer idMaquina;
+    private Integer idEstabelecimento;
     private boolean conectado;
     public static String detalheConexao;
 
@@ -116,6 +117,7 @@ public class KprunninGui extends javax.swing.JFrame {
                 if (testado == true) {
                     conectado = cb.conectarComBanco(connection);
                     this.idMaquina = cb.getIdMaquina();
+                    this.idEstabelecimento = cb.getIdEstabelecimento();
                     conectado = true;
                 }
 
@@ -156,7 +158,7 @@ public class KprunninGui extends javax.swing.JFrame {
 
             try {
                 alerta.lancarAlerta(monitoramento.getCPU()[0], monitoramento.getDisco()[0],
-                        alerta.pegaPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso()), this.idMaquina);
+                        alerta.pegaPorcentagem(monitoramento.getMemoriaTotal(), monitoramento.getMemoriaEmUso()), this.idMaquina, this.idEstabelecimento);
             } catch (IOException | SQLException ex) {
                 java.util.logging.Logger.getLogger(KprunninGui.class.getName()).log(Level.SEVERE, null, ex);
             }
