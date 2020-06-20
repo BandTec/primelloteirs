@@ -59,31 +59,13 @@ router.post('/cadastrar', function(req, res, next) {
 		model: Usuario,
 		mapToModel: true
 	}).then(resultado => {
-		console.log(`Usuário criado: ${resultado}`)
+		console.log(`Usuário criado com sucesso`);
         res.send(resultado);
     }).catch(erro => {
 		console.error(erro);
 		res.status(500).send(erro.message);
   	});
 });
-
-// /* Cadastrar usuário */
-// router.post('/cadastrar', function(req, res, next) {
-// 	console.log('Criando um usuário');
-	
-// 	Usuario.create({
-// 		nome : req.body.nome,
-// 		login : req.body.email,
-// 		senha: req.body.password
-// 	}).then(resultado => {
-// 		console.log(`Registro criado: ${resultado}`)
-//         res.send(resultado);
-//     }).catch(erro => {
-// 		console.error(erro);
-// 		res.status(500).send(erro.message);
-//   	});
-// });
-
 
 /* Verificação de usuário */
 router.get('/sessao/:login', function(req, res, next) {

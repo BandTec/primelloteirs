@@ -72,11 +72,12 @@ function obterDadosGraficoCpu() {
                 //console.log(JSON.stringify(dados));
 
                 plotarGraficoCpu(dados);
-
-
             });
         } else {
-            console.error('Nenhum dado encontrado ou erro na API');
+            if (contador == 0) {
+                abreModal();
+                contador++;
+            }
         }
     })
         .catch(function (error) {

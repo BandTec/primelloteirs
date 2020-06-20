@@ -39,6 +39,28 @@
 </head>
 
 <body class="animsition">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scrollmodalLabel">Erro de Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">Email ou senha incorretos ou não cadastrados</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="page-wrapper">
         <div class="page-content--bge5">
             <div class="container">
@@ -46,7 +68,6 @@
                     <div class="login-content">
                         <div class="login-logo" id="logo">
                             <a href="#" id="a2">PrimeLoitters
-                                <!-- <img src="images/icon/logo.png" alt="CoolAdmin"> -->
                             </a>
                         </div>
                         <div class="login-form">
@@ -62,9 +83,6 @@
                                         placeholder="Senha">
                                 </div>
                                 <div class="login-checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember">Lembre-me
-                                    </label>
                                     <label>
                                         <a href="./forget-pass.html">Esqueci a senha</a>
                                     </label>
@@ -120,7 +138,14 @@
 
 <script>
 
+    function abreModal() {
+        $("#myModal").modal({
+            show: true
+        });
+    }
+
     function entrar() {
+
         var formulario = new URLSearchParams(new FormData(form_login));
         fetch("/usuarios/autenticar", {
             method: "POST",
@@ -139,12 +164,7 @@
                 });
 
             } else {
-
-                console.log('Erro de login!');
-
-                response.text().then(texto => {
-                    console.error(texto);
-                });
+                abreModal();
             }
         });
 

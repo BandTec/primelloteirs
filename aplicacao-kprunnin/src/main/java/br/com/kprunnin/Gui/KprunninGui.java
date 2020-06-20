@@ -14,6 +14,7 @@ import br.com.kprunnin.classes.InfoMaquina;
 import br.com.kprunnin.classes.Logger;
 import br.com.kprunnin.classes.Monitoramento;
 import br.com.kprunnin.DAO.DadoDAO;
+import br.com.kprunnin.DAO.MaquinaDAO;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -32,6 +33,7 @@ import br.com.kprunnin.classes.Toolbox;
 import br.com.kprunnin.conexaoBanco.ConexaoBanco;
 import br.com.kprunnin.conexaoBanco.ConnectionFactory;
 import br.com.kprunnin.modelo.Dado;
+import br.com.kprunnin.modelo.Maquina;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -49,7 +51,7 @@ public class KprunninGui extends javax.swing.JFrame {
     String origem = this.getClass().getSimpleName();
     private final InfoHardware infoHardware;
     private final InfoMaquina infoMaquina;
-    
+
     private final DynamicTimeSeriesCollection datasetCpu;
     private final DynamicTimeSeriesCollection datasetDisco;
 
@@ -76,6 +78,7 @@ public class KprunninGui extends javax.swing.JFrame {
     private boolean testado;
     private Integer idMaquina;
     private Integer idEstabelecimento;
+    private Maquina maquina;
     private boolean conectado;
     public static String detalheConexao;
 
@@ -86,8 +89,7 @@ public class KprunninGui extends javax.swing.JFrame {
     public String getDetalheConexao() {
         return detalheConexao;
     }
-    
-    
+
     public KprunninGui() throws IOException {
         initComponents();
         log.inicio();
@@ -105,9 +107,10 @@ public class KprunninGui extends javax.swing.JFrame {
         this.datasetDisco = new DynamicTimeSeriesCollection(1, 60, new Second());
 
         this.alerta = new Alerta();
+        
 
         if (testado == false) {
-            
+
             try (Connection connection = new ConnectionFactory().getConnection()) {
 
                 ConexaoBanco cb = new ConexaoBanco();
@@ -118,6 +121,7 @@ public class KprunninGui extends javax.swing.JFrame {
                     conectado = cb.conectarComBanco(connection);
                     this.idMaquina = cb.getIdMaquina();
                     this.idEstabelecimento = cb.getIdEstabelecimento();
+                    this.maquina = cb.getMaquina();
                     conectado = true;
                 }
 
@@ -128,6 +132,23 @@ public class KprunninGui extends javax.swing.JFrame {
         }
 
         if (conectado == true) {
+
+            boolean validado = tb.validaMaquina(this.maquina);
+
+            if (!validado) {
+                try (Connection connection = new ConnectionFactory().getConnection()) {
+
+                    Maquina maquinaComDados = new Maquina(this.idMaquina, infoMaquina.getNumeroDeSerie(), infoMaquina.getMarca(),
+                            infoMaquina.getModelo(), infoMaquina.getSistemaOperacional(), infoHardware.getEspacoHd(), infoHardware.getMemoria(),
+                            infoHardware.getProcessador());
+                    MaquinaDAO maquinaDAO = new MaquinaDAO(connection);
+                    maquinaDAO.insert(maquinaComDados);
+
+                } catch (SQLException ex) {
+                    System.out.println("Não foi possível inserir os dados de descrição da máquina");
+                    ex.printStackTrace();
+                }
+            }
 
             getInfoEstaticas();
 
@@ -201,7 +222,7 @@ public class KprunninGui extends javax.swing.JFrame {
         lblSistemaOperacional.setText("Sistema Operacional: " + infoMaquina.getSistemaOperacional());
         lblMemoria.setText("Memoria total: " + infoHardware.getMemoria());
         lblProcessador.setText("Informações do Processador: " + infoHardware.getProcessador());
-        lblArmazenamento.setText(String.format("Armazenamento total: %.1f GB", espacoHD));
+        lblArmazenamento.setText(String.format("Armazenamento total: %s", infoHardware.getEspacoHd()));
 
     }
 
@@ -450,7 +471,7 @@ public class KprunninGui extends javax.swing.JFrame {
 
             }
         });
-        
+
         ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
         try {

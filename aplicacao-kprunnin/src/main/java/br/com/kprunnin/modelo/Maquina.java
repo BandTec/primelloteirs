@@ -10,7 +10,7 @@ package br.com.kprunnin.modelo;
  * @author olive
  */
 public class Maquina {
-    
+
     private Integer idMaquina;
     private String tipoMaquina;
     private String codigoMaquina;
@@ -22,8 +22,22 @@ public class Maquina {
     private String espacoTotalHd;
     private String memoriaTotal;
     private String infoProcessador;
-    
-    public Maquina(){}
+
+    public Maquina() {
+    }
+
+    public Maquina(Integer idMaquina, String numeroSerie,
+            String marcaMaquina, String modelo, String sistemaOperacional, String espacoTotalHd,
+            String memoriaTotal, String infoProcessador) {
+        this.idMaquina = idMaquina;
+        this.numeroSerie = numeroSerie;
+        this.marcaMaquina = marcaMaquina;
+        this.modelo = modelo;
+        this.sistemaOperacional = sistemaOperacional;
+        this.espacoTotalHd = espacoTotalHd;
+        this.memoriaTotal = memoriaTotal;
+        this.infoProcessador = infoProcessador;
+    }
 
     public Maquina(Integer idMaquina, String tipoMaquina, String codigoMaquina, String numeroSerie,
             String marcaMaquina, String modelo, String sistemaOperacional, String espacoTotalHd,
@@ -84,10 +98,10 @@ public class Maquina {
     public String getInfoProcessador() {
         return this.infoProcessador;
     }
-    
+
     @Override
     public String toString() {
         return String.format("Codigo da maquina: %s, fkEstabelecimento: %d", this.codigoMaquina, this.fkEstabelecimento);
     }
-    
+
 }

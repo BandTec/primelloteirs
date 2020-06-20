@@ -49,13 +49,19 @@ public class InfoHardware {
         return memoriaTotal;
     }
 
-    public String getEspacoHd() {
+    public String getEspacoHdFormatado() {
         OSFileStore[] fileStores = arquivosSistema.getFileStores();
         long total = fileStores[0].getTotalSpace();
         String espacoHd = FormatUtil.formatBytes(total);
         return espacoHd;
     }
 
+    public String getEspacoHd() {
+        OSFileStore[] fileStores = arquivosSistema.getFileStores();
+        long total = fileStores[0].getTotalSpace();
+        String espacoHd = FormatUtil.formatBytes(total);
+        return espacoHd;
+    }
     @Override
     public String toString() {
         return "Classe utilizada para capturar informações básicas do Hardware da máquina";

@@ -147,12 +147,9 @@
             if (response.ok) {
                 response.json().then(function (resposta) {
 
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta[0])}`);
-
                     for (i = 0; i < resposta.length; i++) {
                         var registro = resposta[i];
                         opcoes_estabs.push(registro.idEstab);
-                        console.log(registro.codEstab);
                         estabelecimentos.innerHTML += `<center><button id="botao${i}" value="${registro.idEstab}" class="au-btn au-btn--block au-btn--green m-b-20">
                         ${registro.codEstab}</button></center>`;
                     }

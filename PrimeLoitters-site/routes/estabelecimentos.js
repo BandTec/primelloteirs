@@ -38,7 +38,6 @@ router.get('/recuperar/:idUsuario', function(req, res, next) {
 		mapToModel: true 
 	  })
 	  .then(resultado => {
-			console.log(`Encontrados: ${resultado.length}`);
 			res.json(resultado);
 	  }).catch(erro => {
 			console.error(erro);

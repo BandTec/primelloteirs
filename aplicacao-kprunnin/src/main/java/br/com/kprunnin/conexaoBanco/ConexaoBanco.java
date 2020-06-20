@@ -36,6 +36,7 @@ public class ConexaoBanco {
     private String codigoMaquina = "vazia";
     private Integer idMaquina;
     private Integer idEstabelecimento;
+    private Maquina maquina;
     
     public boolean testaConexaoComBanco() throws SQLException, IOException {
 
@@ -108,10 +109,11 @@ public class ConexaoBanco {
 
         EstabelecimentoDAO estabDao = new EstabelecimentoDAO(connection);
         Estabelecimento estabelecimento = estabDao.select(usuario, this.codigoEstab);
-
+        
         MaquinaDAO maquinaDao = new MaquinaDAO(connection);
         Maquina maquina = maquinaDao.select(estabelecimento, this.codigoMaquina);
-        System.out.println(maquina);
+        this.maquina = maquina;
+        
         String mensagem = String.format("Usuario: %s, Estabelecimento: %s, Maquina: %d ",
                 usuario.getNome(), estabelecimento.getCodEstab(), maquina.getIdMaquina());
 
@@ -136,4 +138,7 @@ public class ConexaoBanco {
         return this.idEstabelecimento;
     }
 
+    public Maquina getMaquina(){
+        return this.maquina;
+    }
 }

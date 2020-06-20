@@ -1421,7 +1421,6 @@
             if (event.target.id == opcoes[i]) {
 
                 fetch(`/usuarios/redirecionar`, { cache: 'no-store' }).then(function (response) {
-                    console.log("vishi");
                     sessionStorage.id_maquina_meuapp = event.target.id;
                     window.location.href = "chart.html";
                 });

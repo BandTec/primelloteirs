@@ -13,7 +13,7 @@ router.get('/ultimas/:idMaquina', function (req, res, next) {
 
 	console.log(`Recuperando as últimas ${limite_linhas} leituras`);
 
-	const instrucaoSql =   `select top ${limite_linhas}
+	const instrucaoSql = `select top ${limite_linhas}
 							dataHora,
 							dadosCpu, 
 							dadosMemoria,
@@ -27,8 +27,13 @@ router.get('/ultimas/:idMaquina', function (req, res, next) {
 		mapToModel: true
 	})
 		.then(resultado => {
-			console.log(`Encontrados: ${resultado.length}`);
-			res.json(resultado);
+			if (resultado.length > 0) {
+				res.json(resultado);
+			} else {
+				console.log(`Não foi encontrado dados para a máquina selecionada`);
+				res.status(404).send('Não foi encontrado dados para a máquina selecionada');
+			}
+
 		}).catch(erro => {
 			console.error(erro);
 			res.status(500).send(erro.message);
@@ -57,37 +62,16 @@ router.get('/temporeal/:idMaquina', function (req, res, next) {
 		mapToModel: true
 	})
 		.then(resultado => {
-			console.log(resultado[0].dataValues);
-			res.json(resultado);
+			if (resultado.length > 0) {
+				res.json(resultado);
+			} else {
+				console.log(`Não foi encontrado dados para a máquina selecionada`);
+				res.status(404).send('Não foi encontrado dados para a máquina selecionada');
+			}
 		}).catch(erro => {
 			console.error(erro);
 			res.status(500).send(erro.message);
 		});
-});
-
-
-// estatísticas (max, min, média, mediana, quartis etc)
-router.get('/estatisticas', function (req, res, next) {
-
-	console.log(`Recuperando as estatísticas atuais`);
-
-	const instrucaoSql = `select 
-							max(temperatura) as temp_maxima, 
-							min(temperatura) as temp_minima, 
-							avg(temperatura) as temp_media,
-							max(umidade) as umidade_maxima, 
-							min(umidade) as umidade_minima, 
-							avg(umidade) as umidade_media 
-						from leitura`;
-
-	sequelize.query(instrucaoSql, { type: sequelize.QueryTypes.SELECT })
-		.then(resultado => {
-			res.json(resultado[0]);
-		}).catch(erro => {
-			console.error(erro);
-			res.status(500).send(erro.message);
-		});
-
 });
 
 module.exports = router;

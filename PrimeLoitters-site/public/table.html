@@ -457,7 +457,6 @@
             if (event.target.id == opcoes[i]) {
 
                 fetch(`/usuarios/redirecionar`, { cache: 'no-store' }).then(function (response) {
-                    console.log("vishi");
                     sessionStorage.id_maquina_meuapp = event.target.id;
                     window.location.href = "chart.html";
                 });
@@ -484,7 +483,6 @@
 
                         var registro = resposta[i];
 
-                        console.log(registro);
                         lista_maquinas.innerHTML += `
                         <li>
                             <a href="" id="${registro.IdMaquina}">${registro.codigoMaquina}</a>

@@ -51,7 +51,6 @@ function obterDadosGraficoMemoria() {
     fetch(`/leituras/temporeal/${getIdMaquina()}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
-                //${JSON.stringify(resposta)}
                 console.log(`Dados recebidos`);
                 resposta.reverse();
 
@@ -67,7 +66,10 @@ function obterDadosGraficoMemoria() {
 
             });
         } else {
-            console.error('Nenhum dado encontrado ou erro na API');
+            if (contador == 0) {
+                abreModal();
+                contador++;
+            }
         }
     })
         .catch(function (error) {
