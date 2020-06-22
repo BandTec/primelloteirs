@@ -9,19 +9,9 @@ router.post('/cadastrar/:idEstab', function (req, res, next) {
 	
 	var idEstab = req.params.idEstab;
 	var codigoMaquina = req.body.codigoMaquina;
-	var marca = req.body.marca;
-	var	modelo = req.body.modelo;
-	var numeroSerie = req.body.numeroSerie;
-	var sistemaOperacional = req.body.sistemaOperacional;
-	var espacoTotal = req.body.espacoTotal;
-	var memoriaTotal = req.body.memoriaTotal;
-	var infoProcessador = req.body.infoProcessador;
-
 	
-	let instrucaoSql = `insert into kprMaquina (tipoMaquina, codigoMaquina, numeroSerie, fkEstabelecimento, marcaMaquina,
-						modelo, sistemaOperacional, espacoTotalHd, memoriaTotal, infoProcessador) values
-						('computador', '${codigoMaquina}', '${numeroSerie}', ${idEstab}, '${marca}',
-						 '${modelo}', '${sistemaOperacional}', '${espacoTotal}', '${memoriaTotal}','${infoProcessador}');`;
+	let instrucaoSql = `insert into kprMaquina (tipoMaquina, codigoMaquina, fkEstabelecimento) values
+						('computador', '${codigoMaquina}', ${idEstab});`;
 
 	sequelize.query(instrucaoSql, {
 		model: Maquina,
