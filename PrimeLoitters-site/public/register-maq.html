@@ -44,64 +44,23 @@
                     </div>
 
                     <div class="login-form">
-                        
+
                         <form id="form_cadastro" method="post" onsubmit="return cadastrar()">
                             <center>
                                 <div class="form-group">
                                     <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        Codigo da máquina
+                                        *Codigo da máquina
                                     </label>
-                                    <input class="au-input au-input--full" type="text" name="codigoMaquina" placeholder="A58REF689C">
+                                    <input class="au-input au-input--full" id="codigo" type="text" name="codigoMaquina"
+                                        placeholder="A58REF689C">
                                 </div>
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        Marca da máquina
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="marca" placeholder="Dell">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        Modelo da máquina
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="modelo" placeholder="3470-A15M 9º Geração">
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        Número de série da máquina
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="numeroSerie"
-                                        placeholder="DLX9GL10518068417925">
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        Sistema operacional da máquina
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="sistemaOperacional"
-                                        placeholder="Windows 10">
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        Total de HD da máquina
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="espacoTotal"
-                                        placeholder="1TB">
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        Memória total da máquina
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="memoriaTotal"
-                                        placeholder="8GB RAM">
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        Informações do Processador
-                                    </label>
-                                    <input class="au-input au-input--full" type="text" name="infoProcessador"
-                                        placeholder="i5-10400T">
-                                </div>
+                                <br>
+                                <h5 style="font-size:10px;">*Os campos com asterisco (*) são obrigatórios e devem ter no
+                                    minímo 5 caracteres</h5>
+                                <h5 style="font-size:10px;">*Dados adicionais serão acrescentados pela aplicação em
+                                    relação a máquina registrada</h5>
                             </center>
+
 
                             <center><button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Registrar
                                     máquina</button></center>
@@ -173,5 +132,4 @@
 
         return false;
     }
-
 </script>
