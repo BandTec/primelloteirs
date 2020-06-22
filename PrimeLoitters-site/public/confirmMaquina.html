@@ -34,11 +34,13 @@
                             <center>
                                 <div class="form-group">
                                     <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        blablablablabla blablablablabla blablablablabla blablablablabla blablablablabla blablablablabla 
+                                        Parabéns! Sua máquina foi cadastrada com sucesso, porém ainda não está configurada.
+                                        Baixe através do link abaixo nossa aplicação na máquina desejada e a configure de forma adequada.
+                                        Após isso será possível visualizar os dados coletados nos gráficos correspondentes
                                     </label>
                                 </div>
                             </center>
-                            <center><button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Registrar Máquina</button></center>
+                            <center><button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Voltar a Dashboard</button></center>
                         </form>
                     </div>
                 </div>
@@ -66,7 +68,7 @@
 </body>
 
 </html>
-<!-- 
+
 <script>
     let usuario;
 
@@ -74,18 +76,18 @@
 
     function cadastrar() {
         var formulario = new URLSearchParams(new FormData(form_cadastro));
-        fetch(`/estabelecimentos/cadastrar/${getIdUsuario()}`, {
+        fetch(`/usuarios/redirecionar`, {
             method: "POST",
             body: formulario
         }).then(function(response) {
 
             if (response.ok) {
 
-                window.location.href = 'estabelecimentos.html';
+                window.location.href = 'dash.html';
 
             } else {
 
-                console.log('Erro de cadastro!');
+                console.log('Erro ao redirecionar um usuário');
                 response.text().then(function(resposta) {});
 
             }
@@ -93,4 +95,4 @@
 
         return false;
     }
-</script> -->
+</script>
