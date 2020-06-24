@@ -100,6 +100,7 @@
 
                                     </a>
                                 </li>
+                             
                             </ul>
                         </li>
 
@@ -157,6 +158,12 @@
                                 <li>
                                     <a href="forget-pass.html">
                                         Trocar senha
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://1drv.ms/u/s!AlpWwqoNyNMaaiMSz7pBR0UVxsU?e=1IusJG"
+                                     download="kprunnin" target="_blank">Baixar aplicação
+
                                     </a>
                                 </li>
                             </ul>
@@ -416,7 +423,11 @@
 
                     response.json().then(function(resposta) {
 
-                        quantidade_alertas.innerHTML += `${resposta.length}`;
+                        if(resposta.length > 7 ){
+                            quantidade_alertas.innerHTML += `+7`;
+                        } else {
+                            quantidade_alertas.innerHTML += `${resposta.length}`;
+                        }
                         mini_alerta.innerHTML += `
                         <div class="notifi__title">
                             <p>Você tem ${resposta.length} notificações</p>

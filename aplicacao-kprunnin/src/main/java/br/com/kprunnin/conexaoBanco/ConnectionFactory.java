@@ -11,8 +11,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 import br.com.kprunnin.classes.Toolbox;
-import br.com.kprunnin.Gui.KprunninGui;
-import br.com.kprunnin.conexaoBanco.ConexaoBanco;
 
 /**
  *
@@ -20,10 +18,10 @@ import br.com.kprunnin.conexaoBanco.ConexaoBanco;
  */
 public class ConnectionFactory {
 
-    String origem = this.getClass().getSimpleName();
-    Logger log = new Logger();
-    Toolbox tb = new Toolbox();
-    private DataSource dataSource;
+    private final String origem = this.getClass().getSimpleName();
+    private final Logger log = new Logger();
+    private final Toolbox tb = new Toolbox();
+    private final DataSource dataSource;
     private static String[] detalheConexao = new String[7];
 
     public ConnectionFactory() {

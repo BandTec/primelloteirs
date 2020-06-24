@@ -17,9 +17,9 @@ import oshi.util.Util;
  */
 public class Logger {
 
-    String origem = this.getClass().getSimpleName();
+    private String origem = this.getClass().getSimpleName();
     private boolean firstStart = true;
-    Toolbox tb = new Toolbox();
+    private Toolbox tb = new Toolbox();
 
     public void gravarLinha(String linha) throws IOException {
         String data = tb.data();

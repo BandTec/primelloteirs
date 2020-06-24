@@ -27,9 +27,9 @@ import br.com.kprunnin.classes.Toolbox;
  */
 public class ConexaoBanco {
 
-    String origem = this.getClass().getSimpleName();
-    Logger log = new Logger();
-    Toolbox tb = new Toolbox();
+    private final String origem = this.getClass().getSimpleName();
+    private final Logger log = new Logger();
+    private final Toolbox tb = new Toolbox();
     private String login = "vazia";
     private String senha = "vazia";
     private String codigoEstab = "vazia";
@@ -131,7 +131,7 @@ public class ConexaoBanco {
     }
 
     public Integer getIdMaquina() {
-        return idMaquina;
+        return this.idMaquina;
     }
 
     public Integer getIdEstabelecimento() {
