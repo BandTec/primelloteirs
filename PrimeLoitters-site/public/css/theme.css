@@ -6333,6 +6333,7 @@ section {
 }
 
 .m-t-25 {
+    justify-content: center;
     margin-top: 25px;
 }
 
