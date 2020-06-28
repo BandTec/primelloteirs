@@ -367,14 +367,14 @@
 
     let idMaquina;
 
-    document.body.addEventListener("click", function(event) {
+    document.body.addEventListener("click", function (event) {
 
         for (i = 0; i < opcoes.length; i++) {
             if (event.target.id == opcoes[i]) {
 
                 fetch(`/usuarios/redirecionar`, {
                     cache: 'no-store'
-                }).then(function(response) {
+                }).then(function (response) {
                     sessionStorage.id_maquina_meuapp = event.target.id;
                     window.location.href = "chart.html";
                 });
@@ -393,58 +393,62 @@
 
     function coletar() {
         fetch(`/maquinas/recuperar/${idEstab}`, {
-                cache: 'no-store'
-            }).then(function(response) {
-                if (response.ok) {
+            cache: 'no-store'
+        }).then(function (response) {
+            if (response.ok) {
 
-                    response.json().then(function(resposta) {
+                response.json().then(function (resposta) {
 
-                        for (i = 0; i < resposta.length; i++) {
+                    for (i = 0; i < resposta.length; i++) {
 
-                            var registro = resposta[i];
-                            lista_maquinas.innerHTML += `
+                        var registro = resposta[i];
+                        lista_maquinas.innerHTML += `
                         <li>
                             <a href="" id="${registro.IdMaquina}">${registro.codigoMaquina}</a>
                         </li>
                         `;
 
-                            opcoes.push(`${registro.IdMaquina}`);
-                        }
+                        opcoes.push(`${registro.IdMaquina}`);
+                    }
 
-                        lista_maquinas.innerHTML += `
+                    lista_maquinas.innerHTML += `
                         <li>
                             <a href="./register-maq.html">Nova Máquina</a>
                         </li>
                         `;
-                    });
-                } else {
-                    console.error('Nenhum dado encontrado ou erro na API');
-                }
-            })
-            .catch(function(error) {
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
 
     function alertas() {
         fetch(`/alertas/recuperar/${getIdEstab()}`, {
-                cache: 'no-store'
-            }).then(function(response) {
-                if (response.ok) {
+            cache: 'no-store'
+        }).then(function (response) {
+            if (response.ok) {
 
-                    response.json().then(function(resposta) {
+                response.json().then(function (resposta) {
 
+                    if (resposta.length > 7) {
+                        quantidade_alertas.innerHTML += `+7`;
+                    } else {
                         quantidade_alertas.innerHTML += `${resposta.length}`;
-                        mini_alerta.innerHTML += `
+                    }
+                    mini_alerta.innerHTML += `
                         <div class="notifi__title">
                             <p>Você tem ${resposta.length} notificações</p>
                         </div>
                         `;
-                        for (i = 0; i < resposta.length; i++) {
+                    for (i = 0; i < resposta.length; i++) {
 
-                            var registro = resposta[i];
+                        var registro = resposta[i];
 
-                            mini_alerta.innerHTML += `
+                        mini_alerta.innerHTML += `
                             <div class="notifi__item">
                                 <div class="bg-c3 img-cir img-40 ">
                                     <i class="zmdi zmdi-file-text "></i>
@@ -454,13 +458,13 @@
                                 </div>
                             </div>
                         `;
-                        }
-                    });
-                } else {
-                    console.error('Nenhum dado encontrado ou erro na API');
-                }
-            })
-            .catch(function(error) {
+                    }
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }

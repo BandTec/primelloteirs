@@ -75,19 +75,19 @@
                                 <i class="far fa-check-square"></i>Relatório</a>
                         </li>
                         <li>
-                            <li class="has-sub">
-                                <a class="js-arrow" href="#">
-                                    <i class="fas fa-copy"></i>Configurações</a>
-                                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                    <li>
-                                        <a href="forget-pass.html">Trocar Senha</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="has-sub">
-                                <a class="js-arrow" href="estabelecimentos.html">
-                                    <i class="fas fa-desktop"></i>Trocar Estabelecimento</a>
-                            </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Configurações</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="forget-pass.html">Trocar Senha</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="estabelecimentos.html">
+                                <i class="fas fa-desktop"></i>Trocar Estabelecimento</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -95,7 +95,8 @@
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR  InicioDoSitePadrao-->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -108,7 +109,9 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="card">
-                                    <div class="card-header">Aparentemente as configurações da nossa aplicação não foram realizadas em sua máquina.<br> As realize e volte para analisar os gráficos gerados com os dados coletados
+                                    <div class="card-header">Aparentemente as configurações da nossa aplicação não foram
+                                        realizadas em sua máquina.<br> As realize e volte para analisar os gráficos
+                                        gerados com os dados coletados
                                     </div>
                                 </div>
                             </div>
@@ -329,13 +332,13 @@
         codigo_estabelecimento.innerHTML = `${getCodEstab()}`;
     }
 
-    document.body.addEventListener("click", function(event) {
+    document.body.addEventListener("click", function (event) {
 
         for (i = 0; i < opcoes.length; i++) {
             if (event.target.id == opcoes[i]) {
                 fetch(`/usuarios/redirecionar`, {
                     cache: 'no-store'
-                }).then(function(response) {
+                }).then(function (response) {
                     sessionStorage.id_maquina_meuapp = event.target.id;
                     window.location.href = "chart.html";
                 });
@@ -358,57 +361,61 @@
 
     function coletar() {
         fetch(`/maquinas/recuperar/${getIdEstab()}`, {
-                cache: 'no-store'
-            }).then(function(response) {
-                if (response.ok) {
+            cache: 'no-store'
+        }).then(function (response) {
+            if (response.ok) {
 
-                    response.json().then(function(resposta) {
+                response.json().then(function (resposta) {
 
-                        for (i = 0; i < resposta.length; i++) {
+                    for (i = 0; i < resposta.length; i++) {
 
-                            var registro = resposta[i];
-                            lista_maquinas.innerHTML += `
+                        var registro = resposta[i];
+                        lista_maquinas.innerHTML += `
                         <li>
                             <a href="" id="${registro.IdMaquina}">${registro.codigoMaquina}</a>
                         </li>`;
 
-                            opcoes.push(`${registro.IdMaquina}`);
-                        }
+                        opcoes.push(`${registro.IdMaquina}`);
+                    }
 
-                        lista_maquinas.innerHTML += `
+                    lista_maquinas.innerHTML += `
                         <li>
                             <a href="./register-maq.html">Nova Máquina</a>
                         </li>
                         `;
-                    });
-                } else {
-                    console.error('Nenhum dado encontrado ou erro na API');
-                }
-            })
-            .catch(function(error) {
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
 
     function alertas() {
         fetch(`/alertas/recuperar/${getIdEstab()}`, {
-                cache: 'no-store'
-            }).then(function(response) {
-                if (response.ok) {
+            cache: 'no-store'
+        }).then(function (response) {
+            if (response.ok) {
 
-                    response.json().then(function(resposta) {
+                response.json().then(function (resposta) {
 
+                    if (resposta.length > 7) {
+                        quantidade_alertas.innerHTML += `+7`;
+                    } else {
                         quantidade_alertas.innerHTML += `${resposta.length}`;
-                        mini_alerta.innerHTML += `
+                    }
+                    mini_alerta.innerHTML += `
                         <div class="notifi__title">
                             <p>Você tem ${resposta.length} notificações</p>
                         </div>
                         `;
-                        for (i = 0; i < resposta.length; i++) {
+                    for (i = 0; i < resposta.length; i++) {
 
-                            var registro = resposta[i];
+                        var registro = resposta[i];
 
-                            mini_alerta.innerHTML += `
+                        mini_alerta.innerHTML += `
                             <div class="notifi__item">
                                 <div class="bg-c3 img-cir img-40 ">
                                     <i class="zmdi zmdi-file-text "></i>
@@ -418,13 +425,13 @@
                                 </div>
                             </div>
                         `;
-                        }
-                    });
-                } else {
-                    console.error('Nenhum dado encontrado ou erro na API');
-                }
-            })
-            .catch(function(error) {
+                    }
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
