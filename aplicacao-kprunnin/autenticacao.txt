@@ -1,1 +1,1 @@
-admin;admin;1234567890;maquina3
+administrador@admin.com;admin;1234567890;maquina3
